@@ -18,9 +18,9 @@ MyApp::MyApp() { }
 void MyApp::setup() { }
 
 void MyApp::update() {
-  auto r = cpr::Get(cpr::Url{"https://api.github.com/repos/whoshuu/cpr/contributors"},
-                    cpr::Authentication{"user", "pass"},
-                    cpr::Parameters{{"anon", "true"}, {"key", "value"}});
+//  auto first = cpr::Get(cpr::Url{"https://api.github.com/repos/whoshuu/cpr/contributors"},
+//                    cpr::Authentication{"user", "pass"},
+//                    cpr::Parameters{{"anon", "true"}, {"key", "value"}});
 }
 
 void MyApp::draw() { }
