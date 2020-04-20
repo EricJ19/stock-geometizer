@@ -3,7 +3,11 @@
 #include "my_app.h"
 
 #include <cinder/app/App.h>
-//#include <.gitmodules/cpr/cpr.h>
+
+#include "../submodules/cpr/include/cpr/api.h"
+#include "../submodules/cpr/include/cpr/auth.h"
+#include "../submodules/cpr/include/cpr/cprtypes.h"
+#include "../submodules/cpr/include/cpr/parameters.h"
 
 namespace myapp {
 
@@ -13,7 +17,11 @@ MyApp::MyApp() { }
 
 void MyApp::setup() { }
 
-void MyApp::update() { }
+void MyApp::update() {
+  auto r = cpr::Get(cpr::Url{"https://api.github.com/repos/whoshuu/cpr/contributors"},
+                    cpr::Authentication{"user", "pass"},
+                    cpr::Parameters{{"anon", "true"}, {"key", "value"}});
+}
 
 void MyApp::draw() { }
 

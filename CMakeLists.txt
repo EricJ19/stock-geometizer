@@ -87,5 +87,4 @@ if(NOT catch2_POPULATED)
 endif()
 
 # Add more CMake libraries here ...
-
 add_subdirectory(submodules/cpr)

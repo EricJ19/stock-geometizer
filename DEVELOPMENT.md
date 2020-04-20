@@ -6,5 +6,10 @@
    
  - **4/19/20** Continue integrating CPR library
    - Executed terminal commands to include submodule
-   - Added CPR library to project
+   - Added CPR library to project 
+   - Investigated OpenSSL errors for CPR
+   
+ - **4/20/20** Complete integration CPR library and Build Storage for API Data
+   - Resolved OpenSSL issue for CPR
+   
    
