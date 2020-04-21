@@ -39,7 +39,7 @@ int FinanceData::GetStrongSellRec() const {
 /**
  * Setters
  */
- 
+
 void FinanceData::Set26WkPriceReturn(double _26_wk_price_return_to_set) {
   _26_wk_price_return = _26_wk_price_return_to_set;
 }
