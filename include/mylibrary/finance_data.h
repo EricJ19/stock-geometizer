@@ -6,11 +6,13 @@
 namespace mylibrary {
 
 class FinanceData {
+ private:
   // Various data received from API call to build geometry:
 
   // The API updates this value Daily.
-  double _26_week_price_return;
-  double _3_year_rev_growth_rate_s;
+  double _26_wk_price_return;
+
+  double _3_yr_rev_growth_rate;
 
   // Number of recommendations to buy, sell, and hold stock, respectively.
   int buy_rec;
@@ -20,6 +22,25 @@ class FinanceData {
   // Number of recommendations to strongly buy and sell stock, respectively.
   int strong_buy_rec;
   int strong_sell_rec;
+
+ public:
+  // Getters
+  double Get26WkPriceReturn() const;
+  double Get3YrRevGrowthRate() const;
+  int GetBuyRec() const;
+  int GetSellRec() const;
+  int GetHoldRec() const;
+  int GetStrongBuyRec() const;
+  int GetStrongSellRec() const;
+
+  // Setters
+  void Set26WkPriceReturn(double _26_wk_price_return);
+  void Set3YrRevGrowthRate(double _3_yr_rev_growth_rate);
+  void SetBuyRec(int buy_rec);
+  void SetSellRec(int sell_rec);
+  void SetHoldRec(int hold_rec);
+  void SetStrongBuyRec(int strong_buy_rec);
+  void SetStrongSellRec(int strong_sell_rec);
 };
 
 }  // namespace mylibrary
