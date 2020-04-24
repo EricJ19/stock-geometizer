@@ -8,6 +8,7 @@ namespace finance {
 class FinanceData {
  private:
   // Various data received from API call to build geometry:
+  double price_quote;
 
   // The API updates this value Daily.
   double _26_wk_price_return;
@@ -25,6 +26,7 @@ class FinanceData {
 
  public:
   // Getters
+  double GetPriceQuote() const;
   double Get26WkPriceReturn() const;
   double Get3YrRevGrowthRate() const;
   int GetBuyRec() const;
@@ -34,13 +36,14 @@ class FinanceData {
   int GetStrongSellRec() const;
 
   // Setters
-  void Set26WkPriceReturn(double _26_wk_price_return);
-  void Set3YrRevGrowthRate(double _3_yr_rev_growth_rate);
-  void SetBuyRec(int buy_rec);
-  void SetSellRec(int sell_rec);
-  void SetHoldRec(int hold_rec);
-  void SetStrongBuyRec(int strong_buy_rec);
-  void SetStrongSellRec(int strong_sell_rec);
+  void SetPriceQuote(double price_quote_to_set);
+  void Set26WkPriceReturn(double _26_wk_price_return_to_set);
+  void Set3YrRevGrowthRate(double _3_yr_rev_growth_rate_to_set);
+  void SetBuyRec(int buy_rec_to_set);
+  void SetSellRec(int sell_rec_to_set);
+  void SetHoldRec(int hold_rec_to_set);
+  void SetStrongBuyRec(int strong_buy_rec_to_set);
+  void SetStrongSellRec(int strong_sell_rec_to_set);
 };
 
 }  // namespace finance

@@ -3,12 +3,17 @@
 //
 #include <mylibrary/finance_geometry.h>
 
-void geometry::Geometry::SetOuterColors(double _26_wk_price_return,
+void geometry::Geometry::SetOuterColors(double price_quote,
+                                        double _26_wk_price_return,
                                         double _3_yr_rev_growth_rate) {
-
+  outer_red_value = 2;
+  outer_green_value = 2;
+  // Blue color is not needed.
+  outer_blue_value = 0;
 }
 
-void geometry::Geometry::SetOuterEdges(double _26_wk_price_return,
+void geometry::Geometry::SetOuterEdges(double price_quote,
+                                       double _26_wk_price_return,
                                        double _3_yr_rev_growth_rate) {
 
 }
@@ -35,6 +40,10 @@ void geometry::Geometry::SetInnerColors(int buy_rec,
                                         int hold_rec,
                                         int strong_buy_rec,
                                         int strong_sell_rec) {
+  inner_red_value = 2;
+  inner_green_value = 2;
+  // Blue color is not needed.
+  inner_blue_value = 0;
 
 }
 

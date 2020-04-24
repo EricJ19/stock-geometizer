@@ -9,6 +9,12 @@ namespace geometry {
 
 class Geometry {
  private:
+  // Weighting used to skew geometric shape in favor of certain financial
+  // measures more than others.
+  // All weighting adds up to 1.0.
+  const double kPriceReturnWeight = 0.7;
+  const double kRevGrowthWeight = 0.3;
+
   // RGB values for the outer geometry.
   int outer_red_value;
   int outer_green_value;
@@ -26,9 +32,17 @@ class Geometry {
   int inner_edge_number;
 
  public:
-  void SetOuterColors(double _26_wk_price_return,
+  // Note: outer and inner calculates represent the desirability of stocks.
+  // The more red, the more undesirable (eg. buy_rec is low),
+  // The more green, the more desirable.
+  // Yellow represents a mix of desirability and undesirability.
+  // Blue color is not necessary although it is an option than can be modified.
+
+  void SetOuterColors(double price_quote,
+                      double _26_wk_price_return,
                       double _3_yr_rev_growth_rate);
-  void SetOuterEdges(double _26_wk_price_return,
+  void SetOuterEdges(double price_quote,
+                     double _26_wk_price_return,
                      double _3_yr_rev_growth_rate);
   int GetOuterRedColor();
   int GetOuterGreenColor();

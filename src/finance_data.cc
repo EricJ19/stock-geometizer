@@ -8,6 +8,10 @@ namespace finance {
  * Getters
  */
 
+double FinanceData::GetPriceQuote() const {
+  return price_quote;
+}
+
 double FinanceData::Get26WkPriceReturn() const {
   return _26_wk_price_return;
 }
@@ -40,6 +44,10 @@ int FinanceData::GetStrongSellRec() const {
  * Setters
  */
 
+void FinanceData::SetPriceQuote(double price_quote_to_set) {
+  price_quote = price_quote_to_set;
+}
+
 void FinanceData::Set26WkPriceReturn(double _26_wk_price_return_to_set) {
   _26_wk_price_return = _26_wk_price_return_to_set;
 }
@@ -67,4 +75,5 @@ void FinanceData::SetStrongBuyRec(int strong_buy_rec_to_set) {
 void FinanceData::SetStrongSellRec(int strong_sell_rec_to_set) {
   strong_sell_rec = strong_sell_rec_to_set;
 }
+
 }  // namespace mylibrary
