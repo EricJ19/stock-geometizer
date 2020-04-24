@@ -11,22 +11,31 @@ class Geometry {
  private:
   // Weighting used to skew geometric shape in favor of certain financial
   // measures more than others.
-  // All weighting adds up to 1.0.
+
+  // Weight based on percentage.
   const double kPriceReturnWeight = 0.7;
   const double kRevGrowthWeight = 0.3;
+  // Weight based on real value.
+  const double kStrongRecWeight = 2.0;
+
+  // Max/min values for scaling purposes.
+  // Max Rec is arbitrarily large.
+  // "double" type is used for division with other double values.
+  const double kMaxRecNumb = 35;
+
 
   // RGB values for the outer geometry.
-  int outer_red_value;
-  int outer_green_value;
-  int outer_blue_value;
+  double outer_red_value;
+  double outer_green_value;
+  double outer_blue_value;
 
   // Number of edges forming the outer shape.
   int outer_edge_number;
 
   // RGB values for the inner geometry.
-  int inner_red_value;
-  int inner_green_value;
-  int inner_blue_value;
+  double inner_red_value;
+  double inner_green_value;
+  double inner_blue_value;
 
   // Number of edges forming the inner shape.
   int inner_edge_number;

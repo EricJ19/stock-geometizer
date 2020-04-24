@@ -40,11 +40,23 @@ void geometry::Geometry::SetInnerColors(int buy_rec,
                                         int hold_rec,
                                         int strong_buy_rec,
                                         int strong_sell_rec) {
-  inner_red_value = 2;
-  inner_green_value = 2;
-  // Blue color is not needed.
-  inner_blue_value = 0;
+  double unscaled_red = kStrongRecWeight * strong_sell_rec
+                      + sell_rec
+                      + hold_rec;
+  double unscaled_green = kStrongRecWeight * strong_buy_rec
+                          + buy_rec
+                          + hold_rec;
+  // Blue color is not needed but can be changed.
+  double unscaled_blue = 0.0;
 
+  // Scales values to between 0 and 1.
+  double scaled_red = unscaled_red / kMaxRecNumb;
+  double scaled_green = unscaled_green / kMaxRecNumb;
+  double scaled_blue = unscaled_green / kMaxRecNumb;
+
+  inner_red_value = scaled_red;
+  inner_green_value = scaled_green;
+  inner_blue_value = scaled_blue;
 }
 
 void geometry::Geometry::SetInnerEdges(int buy_rec,
