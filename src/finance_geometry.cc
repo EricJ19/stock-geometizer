@@ -15,7 +15,25 @@ void geometry::Geometry::SetOuterColors(double price_quote,
 void geometry::Geometry::SetOuterEdges(double price_quote,
                                        double _26_wk_price_return,
                                        double _3_yr_rev_growth_rate) {
+  // Turn price return as a growth rate.
+  int deci_to_percent = 100;
+  double _26_wk_price_growth_rate
+    = (_26_wk_price_return / price_quote) * deci_to_percent;
 
+  // Price return and growth weight can be positive or negative.
+  double unscaled_edge_number = kPriceReturnWeight * _26_wk_price_growth_rate
+                              + kStrongRecWeight * _3_yr_rev_growth_rate;
+
+  // Scale edge_number between 0 and 30 (max edges).
+  double scaled_edge_number
+      = (unscaled_edge_number / kMaxRecNumb) * kMaxOuterEdgeNumb;
+
+  // Ensure scaled value is at least 3 to create a valid polygon shape.
+  if (scaled_edge_number < kMinEdgeNumb) {
+    scaled_edge_number = kMinEdgeNumb;
+  }
+
+  outer_edge_number = (int) scaled_edge_number;
 }
 
 double geometry::Geometry::GetOuterRedColor() {
@@ -83,7 +101,7 @@ void geometry::Geometry::SetInnerEdges(int buy_rec,
 
   // Scale edge_number between 0 and 10 (max edges).
   double scaled_edge_number
-    = (unscaled_edge_number / kMaxRecNumb) * kMaxEdgeNumb;
+    = (unscaled_edge_number / kMaxRecNumb) * kMaxInnerEdgeNumb;
 
   // Ensure scaled value is at least 3 to create a valid polygon shape.
   if (scaled_edge_number < kMinEdgeNumb) {

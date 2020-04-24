@@ -13,6 +13,7 @@ class FinanceData {
   // The API updates this value Daily.
   double _26_wk_price_return;
 
+  // Growth rate measured as a percentage (can be negative).
   double _3_yr_rev_growth_rate;
 
   // Number of recommendations to buy, sell, and hold stock, respectively.

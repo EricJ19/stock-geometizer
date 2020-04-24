@@ -18,14 +18,19 @@ class Geometry {
   // Weight based on real value.
   const double kStrongRecWeight = 2.0;
 
-  // Max/min values for scaling purposes.
-  // Max Rec is arbitrarily large.
+  // Below are Max/min const values for scaling purposes.
   // "double" type is used for division with other double values.
+
+  // Max Rec is arbitrarily large.
   const double kMaxRecNumb = 35;
-  const double kMaxEdgeNumb = 10;
+
+  // Outer edge number is larger than inner as
+  // outer shape is related to percentage, which has larger range
+  // than recommendation number used for inner edge number.
+  const double kMaxOuterEdgeNumb = 30;
+  const double kMaxInnerEdgeNumb = 10;
   // Minimum polygon shape is a triangle.
   const double kMinEdgeNumb = 3;
-
 
   // RGB values for the outer geometry.
   double outer_red_value;
