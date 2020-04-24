@@ -14,19 +14,19 @@ void geometry::Geometry::SetOuterEdges(double _26_wk_price_return,
 }
 
 int geometry::Geometry::GetOuterRedColor() {
-
+  return this->outer_red_value;
 }
 
 int geometry::Geometry::GetOuterGreenColor() {
-
+  return this->outer_green_value;
 }
 
 int geometry::Geometry::GetOuterBlueColor() {
-
+  return this->outer_blue_value;
 }
 
 int geometry::Geometry::GetOuterEdgeNumber() {
-
+  return this->outer_edge_number;
 }
 
 
@@ -47,18 +47,18 @@ void geometry::Geometry::SetInnerEdges(int buy_rec,
 }
 
 int geometry::Geometry::GetInnerRedColor() {
-
+  return this->inner_red_value;
 }
 
 int geometry::Geometry::GetInnerGreenColor() {
-
+  return this->inner_green_value;
 }
 
 int geometry::Geometry::GetInnerBlueColor() {
-
+  return this->inner_blue_value;
 }
 
 int geometry::Geometry::GetInnerEdgeNumber() {
-
+  return this->inner_edge_number;
 }
 
