@@ -43,7 +43,7 @@ class FinanceData {
   void SetStrongSellRec(int strong_sell_rec);
 };
 
-}  // namespace mylibrary
+}  // namespace finance
 
 
-#endif // FINALPROJECT_MYLIBRARY_EXAMPLE_H_
+#endif // FINALPROJECT_FINANCE_DATA_H_

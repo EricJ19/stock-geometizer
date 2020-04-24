@@ -15,8 +15,10 @@
    - Had to utilize Terminal and chang CMake configurations to integrate CPR
    - Created class to store API finance data
  
- - **4/23/20** Developed Additional Classes
-   - Created Geometry Class
+ - **4/23/20** Created Header for Geometry Class
+   
+ - **4/24/20** Developed Additional Functionality and Utilize API Calls
+   - Created functions to utilize API calls
    
    
    

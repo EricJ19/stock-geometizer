@@ -33,6 +33,6 @@ class GeometryData {
   void SetInnerEdges();
 };
 
-}
+} // namespace geometry
 
 #endif  // FINALPROJECT_GEOMETRY_DATA_H

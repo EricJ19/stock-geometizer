@@ -13,18 +13,20 @@ namespace myapp {
 
 using cinder::app::KeyEvent;
 
-MyApp::MyApp() { }
+StockGeo::StockGeo() { }
 
-void MyApp::setup() { }
+void StockGeo::setup() {
 
-void MyApp::update() {
+}
+
+void StockGeo::update() {
 //  auto first = cpr::Get(cpr::Url{"https://api.github.com/repos/whoshuu/cpr/contributors"},
 //                    cpr::Authentication{"user", "pass"},
 //                    cpr::Parameters{{"anon", "true"}, {"key", "value"}});
 }
 
-void MyApp::draw() { }
+void StockGeo::draw() { }
 
-void MyApp::keyDown(KeyEvent event) { }
+void StockGeo::keyDown(KeyEvent event) { }
 
 }  // namespace myapp

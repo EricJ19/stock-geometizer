@@ -4,13 +4,13 @@
 #define FINALPROJECT_APPS_MYAPP_H_
 
 #include <cinder/app/App.h>
-
+#include <mylibrary/finance_data.h>
 
 namespace myapp {
 
-class MyApp : public cinder::app::App {
+class StockGeo : public cinder::app::App {
  public:
-  MyApp();
+  StockGeo();
   void setup() override;
   void update() override;
   void draw() override;
