@@ -18,7 +18,6 @@ class StockGeo : public cinder::app::App {
   geometry::Geometry first_geo;
   geometry::Geometry second_geo;
   geometry::Geometry third_geo;
-
  public:
   StockGeo();
   void setup() override;

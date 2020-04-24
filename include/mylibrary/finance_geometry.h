@@ -26,11 +26,29 @@ class Geometry {
   int inner_edge_number;
 
  public:
-  void SetOuterColors();
-  void SetOuterEdges();
+  void SetOuterColors(double _26_wk_price_return,
+                      double _3_yr_rev_growth_rate);
+  void SetOuterEdges(double _26_wk_price_return,
+                     double _3_yr_rev_growth_rate);
+  int GetOuterRedColor();
+  int GetOuterGreenColor();
+  int GetOuterBlueColor();
+  int GetOuterEdgeNumber();
 
-  void SetInnerColors();
-  void SetInnerEdges();
+  void SetInnerColors(int buy_rec,
+                      int sell_rec,
+                      int hold_rec,
+                      int strong_buy_rec,
+                      int strong_sell_rec);
+  void SetInnerEdges(int buy_rec,
+                     int sell_rec,
+                     int hold_rec,
+                     int strong_buy_rec,
+                     int strong_sell_rec);
+  int GetInnerRedColor();
+  int GetInnerGreenColor();
+  int GetInnerBlueColor();
+  int GetInnerEdgeNumber();
 };
 
 } // namespace geometry
