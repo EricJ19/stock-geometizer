@@ -22,6 +22,9 @@ class Geometry {
   // Max Rec is arbitrarily large.
   // "double" type is used for division with other double values.
   const double kMaxRecNumb = 35;
+  const double kMaxEdgeNumb = 10;
+  // Minimum polygon shape is a triangle.
+  const double kMinEdgeNumb = 3;
 
 
   // RGB values for the outer geometry.
@@ -30,6 +33,8 @@ class Geometry {
   double outer_blue_value;
 
   // Number of edges forming the outer shape.
+  // More edges mean more positive price return and growth rate.
+  // less edges more more negative price return and growth rate.
   int outer_edge_number;
 
   // RGB values for the inner geometry.
@@ -38,6 +43,8 @@ class Geometry {
   double inner_blue_value;
 
   // Number of edges forming the inner shape.
+  // More edges mean more buy recommendations
+  // less edges more sell recommendations.
   int inner_edge_number;
 
  public:
@@ -63,9 +70,9 @@ class Geometry {
                       int hold_rec,
                       int strong_buy_rec,
                       int strong_sell_rec);
+  // Inner edge number defined only by buy/sell recommendations (no hold_rec).
   void SetInnerEdges(int buy_rec,
                      int sell_rec,
-                     int hold_rec,
                      int strong_buy_rec,
                      int strong_sell_rec);
   double GetInnerRedColor();

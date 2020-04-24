@@ -49,10 +49,23 @@ void geometry::Geometry::SetInnerColors(int buy_rec,
   // Blue color is not needed but can be changed.
   double unscaled_blue = 0.0;
 
+  // Ensure unscaled values are not larger than maximum threshold.
+  if (unscaled_red > kMaxRecNumb) {
+    unscaled_red = kMaxRecNumb;
+  }
+
+  if (unscaled_green > kMaxRecNumb) {
+    unscaled_red = kMaxRecNumb;
+  }
+
+  if (unscaled_green > kMaxRecNumb) {
+    unscaled_red = kMaxRecNumb;
+  }
+
   // Scales values to between 0 and 1.
   double scaled_red = unscaled_red / kMaxRecNumb;
   double scaled_green = unscaled_green / kMaxRecNumb;
-  double scaled_blue = unscaled_green / kMaxRecNumb;
+  double scaled_blue = unscaled_blue / kMaxRecNumb;
 
   inner_red_value = scaled_red;
   inner_green_value = scaled_green;
@@ -61,10 +74,23 @@ void geometry::Geometry::SetInnerColors(int buy_rec,
 
 void geometry::Geometry::SetInnerEdges(int buy_rec,
                                        int sell_rec,
-                                       int hold_rec,
                                        int strong_buy_rec,
                                        int strong_sell_rec) {
+  double unscaled_edge_number = kStrongRecWeight * strong_buy_rec
+                         + buy_rec
+                         - sell_rec
+                         - kStrongRecWeight * strong_sell_rec;
 
+  // Scale edge_number between 0 and 10 (max edges).
+  double scaled_edge_number
+    = (unscaled_edge_number / kMaxRecNumb) * kMaxEdgeNumb;
+
+  // Ensure scaled value is at least 3 to create a valid polygon shape.
+  if (scaled_edge_number < kMinEdgeNumb) {
+    scaled_edge_number = kMinEdgeNumb;
+  }
+
+  inner_edge_number = (int) scaled_edge_number;
 }
 
 double geometry::Geometry::GetInnerRedColor() {
