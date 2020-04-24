@@ -3,7 +3,7 @@
 #define FINALPROJECT_MYLIBRARY_EXAMPLE_H_
 
 
-namespace mylibrary {
+namespace finance {
 
 class FinanceData {
  private:
@@ -11,7 +11,7 @@ class FinanceData {
 
   // The API updates this value Daily.
   double _26_wk_price_return;
-  
+
   double _3_yr_rev_growth_rate;
 
   // Number of recommendations to buy, sell, and hold stock, respectively.

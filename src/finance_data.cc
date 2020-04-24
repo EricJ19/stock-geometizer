@@ -2,7 +2,7 @@
 
 #include <mylibrary/finance_data.h>
 
-namespace mylibrary {
+namespace finance {
 
 /**
  * Getters
