@@ -3,7 +3,6 @@
 #include "stock_geometizer.h"
 
 #include <cinder/app/App.h>
-//#include "CinderImGui.h"
 
 #include "../submodules/cpr/include/cpr/api.h"
 #include "../submodules/cpr/include/cpr/auth.h"
@@ -17,14 +16,11 @@ using cinder::app::KeyEvent;
 StockGeo::StockGeo() { }
 
 void StockGeo::setup() {
-  //ImGui
 
 }
 
 void StockGeo::update() {
-//  auto first = cpr::Get(cpr::Url{"https://api.github.com/repos/whoshuu/cpr/contributors"},
-//                    cpr::Authentication{"user", "pass"},
-//                    cpr::Parameters{{"anon", "true"}, {"key", "value"}});
+  cpr::Url{"https://finnhub.io/api/v1/stock/eps-estimate?symbol=AMZN&freq=annual&token=bqhl2s7rh5rdcs9r2ovg"};
 }
 
 void StockGeo::draw() {

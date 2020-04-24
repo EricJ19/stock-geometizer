@@ -88,3 +88,4 @@ endif()
 
 # Add more CMake libraries here ...
 add_subdirectory(submodules/cpr)
+include_directories(${CPR_INCLUDE_DIRS})

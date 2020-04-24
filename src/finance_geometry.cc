@@ -6,10 +6,52 @@
 void geometry::Geometry::SetOuterColors(double price_quote,
                                         double _26_wk_price_return,
                                         double _3_yr_rev_growth_rate) {
-  outer_red_value = 2;
-  outer_green_value = 2;
-  // Blue color is not needed.
-  outer_blue_value = 0;
+  // Turn price return as a growth rate.
+  int deci_to_percent = 100;
+  double _26_wk_price_growth_rate
+      = (_26_wk_price_return / price_quote) * deci_to_percent;
+  double weighted_index = kPriceReturnWeight * _26_wk_price_growth_rate
+                        + kRevGrowthWeight * _3_yr_rev_growth_rate;
+
+  double unscaled_red = 0.0;
+  double unscaled_green = 0.0;
+  // Blue color is not needed but can be changed.
+  double unscaled_blue = 0.0;
+
+  // Create red, blue, or yellow shade depending on index
+  if (weighted_index < 0) {
+    unscaled_red = weighted_index;
+  } else if (weighted_index > 0) {
+    unscaled_green = weighted_index;
+  } else if (weighted_index == 0) {
+    unscaled_red = weighted_index;
+    unscaled_green = weighted_index;
+  }
+
+  // Ensure unscaled values are not larger than maximum threshold.
+  if (unscaled_red > kMaxGrowthRate) {
+    unscaled_red = kMaxGrowthRate;
+  }
+
+  if (unscaled_green > kMaxGrowthRate) {
+    unscaled_green = kMaxGrowthRate;
+  }
+
+  if (unscaled_blue > kMaxGrowthRate) {
+    unscaled_blue = kMaxGrowthRate;
+  }
+
+  // Scales values to between 0 and 1.
+  double scaled_red = (unscaled_red - kMinGrowthRate)
+                    / (kMaxRecNumb - kMinGrowthRate);
+  double scaled_green = (unscaled_red - kMinGrowthRate)
+                        / (kMaxRecNumb - kMinGrowthRate);
+  double scaled_blue = (unscaled_red - kMinGrowthRate)
+                       / (kMaxRecNumb - kMinGrowthRate);
+
+  outer_red_value = scaled_red;
+  outer_green_value = scaled_green;
+  outer_blue_value = scaled_blue;
 }
 
 void geometry::Geometry::SetOuterEdges(double price_quote,
@@ -73,11 +115,11 @@ void geometry::Geometry::SetInnerColors(int buy_rec,
   }
 
   if (unscaled_green > kMaxRecNumb) {
-    unscaled_red = kMaxRecNumb;
+    unscaled_green = kMaxRecNumb;
   }
 
-  if (unscaled_green > kMaxRecNumb) {
-    unscaled_red = kMaxRecNumb;
+  if (unscaled_blue > kMaxRecNumb) {
+    unscaled_blue = kMaxRecNumb;
   }
 
   // Scales values to between 0 and 1.

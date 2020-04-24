@@ -23,6 +23,10 @@ class Geometry {
 
   // Max Rec is arbitrarily large.
   const double kMaxRecNumb = 35;
+  // Max and Min Growth Rate are for _26_wk_price_return and
+  // _3_yr_rev_growth_rate. These are arbitrarily and small percentages.
+  const double kMinGrowthRate = -120;
+  const double kMaxGrowthRate = 120;
 
   // Outer edge number is larger than inner as
   // outer shape is related to percentage, which has larger range
