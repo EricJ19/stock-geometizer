@@ -53,10 +53,10 @@ class Geometry {
   void SetOuterEdges(double price_quote,
                      double _26_wk_price_return,
                      double _3_yr_rev_growth_rate);
-  int GetOuterRedColor();
-  int GetOuterGreenColor();
-  int GetOuterBlueColor();
-  int GetOuterEdgeNumber();
+  double GetOuterRedColor();
+  double GetOuterGreenColor();
+  double GetOuterBlueColor();
+  double GetOuterEdgeNumber();
 
   void SetInnerColors(int buy_rec,
                       int sell_rec,
@@ -68,10 +68,10 @@ class Geometry {
                      int hold_rec,
                      int strong_buy_rec,
                      int strong_sell_rec);
-  int GetInnerRedColor();
-  int GetInnerGreenColor();
-  int GetInnerBlueColor();
-  int GetInnerEdgeNumber();
+  double GetInnerRedColor();
+  double GetInnerGreenColor();
+  double GetInnerBlueColor();
+  double GetInnerEdgeNumber();
 };
 
 } // namespace geometry
