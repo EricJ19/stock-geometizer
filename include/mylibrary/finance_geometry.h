@@ -7,7 +7,7 @@
 
 namespace geometry {
 
-class GeometryData {
+class Geometry {
  private:
   // RGB values for the outer geometry.
   int outer_red_value;
@@ -18,9 +18,9 @@ class GeometryData {
   int outer_edge_number;
 
   // RGB values for the inner geometry.
-  int outer_red_value;
-  int outer_green_value;
-  int outer_blue_value;
+  int inner_red_value;
+  int inner_green_value;
+  int inner_blue_value;
 
   // Number of edges forming the inner shape.
   int inner_edge_number;

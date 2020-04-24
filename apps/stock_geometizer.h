@@ -5,10 +5,20 @@
 
 #include <cinder/app/App.h>
 #include <mylibrary/finance_data.h>
+#include <mylibrary/finance_geometry.h>
 
 namespace myapp {
 
 class StockGeo : public cinder::app::App {
+ private:
+  finance::FinanceData first_fin_data;
+  finance::FinanceData second_fin_data;
+  finance::FinanceData third_fin_data;
+
+  geometry::Geometry first_geo;
+  geometry::Geometry second_geo;
+  geometry::Geometry third_geo;
+
  public:
   StockGeo();
   void setup() override;
