@@ -17,8 +17,9 @@
  
  - **4/23/20** Created Header for Geometry Class
    
- - **4/24/20** Developed Additional Functionality and Utilize API Calls
-   - Created functions to utilize API calls
+ - **4/24/20** Developed Additional Functionality
+   - Completed implementations of Geometry class
+   - Refactored various file names
    
    
    
