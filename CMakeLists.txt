@@ -103,3 +103,18 @@ target_link_libraries(cinder-myapp ${CURL_LIBRARY})
 add_subdirectory(submodules/cpr)
 include_directories(${CPR_INCLUDE_DIRS})
 target_link_libraries(cinder-myapp ${CPR_LIBRARIES})
+
+# JSON Library. Header-only.
+FetchContent_Declare(
+        nlohmann_json
+        URL https://github.com/nlohmann/json/releases/download/v3.7.3/include.zip
+)
+
+# Adds nlohmann_json library.
+FetchContent_GetProperties(nlohmann_json)
+if(NOT nlohmann_json_POPULATED)
+    FetchContent_Populate(nlohmann_json)
+    add_library(nlohmann_json INTERFACE)
+    target_include_directories(nlohmann_json INTERFACE ${nlohmann_json_SOURCE_DIR}/single_include)
+endif()
+
