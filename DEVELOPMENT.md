@@ -12,14 +12,19 @@
  - **4/20/20** Completed integration CPR library and Built Storage for API Data
    - Resolved OpenSSL issue for CPR
    - Resolved issues with #include filepath in CPR submodule
-   - Had to utilize Terminal and chang CMake configurations to integrate CPR
-   - Created class to store API finance data
+   - Had to utilize Terminal and change CMake configurations to integrate CPR as a submodule
+   - Created FinanceData class to store API finance data
  
- - **4/23/20** Created Header for Geometry Class
+ - **4/23/20** Created finance_geometry.h for Geometry Class
    
- - **4/24/20** Developed Additional Functionality
+ - **4/24/20** Developed Additional Functionality for Producing Geometry
    - Completed implementations of Geometry class
    - Refactored various file names
+   
+ - **4/27/20** Fix Library Integration Issues and Interact with API Calls
+   - Fixed OpenSSL (used with CPR) issues in CMake
+   - Included rlohmann_json library
+   
    
    
    
