@@ -9,6 +9,7 @@
 #include "../submodules/cpr/include/cpr/cprtypes.h"
 #include "../submodules/cpr/include/cpr/parameters.h"
 
+
 namespace myapp {
 
 using cinder::app::KeyEvent;
@@ -20,7 +21,8 @@ void StockGeo::setup() {
 }
 
 void StockGeo::update() {
-  cpr::Url{"https://finnhub.io/api/v1/stock/eps-estimate?symbol=AMZN&freq=annual&token=bqhl2s7rh5rdcs9r2ovg"};
+  auto test = cpr::Get(cpr::Url{"https://finnhub.io/api/v1/stock/eps-estimate?symbol=AMZN&freq=annual&token=bqhl2s7rh5rdcs9r2ovg"});
+
 }
 
 void StockGeo::draw() {

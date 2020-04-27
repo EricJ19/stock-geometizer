@@ -21,8 +21,10 @@ void geometry::Geometry::SetOuterColors(double price_quote,
   // Create red, blue, or yellow shade depending on index
   if (weighted_index < 0) {
     unscaled_red = weighted_index;
+
   } else if (weighted_index > 0) {
     unscaled_green = weighted_index;
+
   } else if (weighted_index == 0) {
     unscaled_red = weighted_index;
     unscaled_green = weighted_index;
