@@ -23,7 +23,11 @@
    
  - **4/27/20** Fix Library Integration Issues and Interact with API Calls
    - Fixed OpenSSL (used with CPR) issues in CMake
-   - Included rlohmann_json library
+   - Included nlohmann_json library
+   
+ - **4/29/20** Add Cinder Blocks and Develop UI
+   - Incorporated ImGui CinderBlock for accepting user inputs to make API calls
+   - 
    
    
    

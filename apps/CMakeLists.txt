@@ -2,6 +2,7 @@ get_filename_component(CINDER_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../" ABSOL
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
 
+
 file(GLOB SOURCE_LIST CONFIGURE_DEPENDS
         "${FinalProject_SOURCE_DIR}/apps/*.h"
         "${FinalProject_SOURCE_DIR}/apps/*.hpp"
@@ -14,7 +15,7 @@ ci_make_app(
     CINDER_PATH ${CINDER_PATH}
     SOURCES     ${SOURCE_LIST}
     LIBRARIES   mylibrary
-    BLOCKS
+    BLOCKS      ${CINDER_PATH}/blocks/Cinder-ImGui/
 )
 
 target_compile_features(cinder-myapp PRIVATE cxx_std_14)
