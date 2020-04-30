@@ -8,6 +8,7 @@
 #include "../submodules/cpr/include/cpr/auth.h"
 #include "../submodules/cpr/include/cpr/cprtypes.h"
 #include "../submodules/cpr/include/cpr/parameters.h"
+#include <nlohmann/json.hpp>
 
 
 namespace myapp {

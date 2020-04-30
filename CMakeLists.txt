@@ -118,3 +118,4 @@ if(NOT nlohmann_json_POPULATED)
     target_include_directories(nlohmann_json INTERFACE ${nlohmann_json_SOURCE_DIR}/single_include)
 endif()
 
+target_link_libraries(cinder-myapp nlohmann_json)
