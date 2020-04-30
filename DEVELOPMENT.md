@@ -27,7 +27,8 @@
    
  - **4/29/20** Add Cinder Blocks and Develop UI
    - Incorporated ImGui CinderBlock for accepting user inputs to make API calls
-   - 
+   - Created Window using ImGui to accept user inputs. This is used to create custom API calls for 
+   whatever stock the user chooses.
    
    
    

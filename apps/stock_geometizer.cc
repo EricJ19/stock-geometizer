@@ -32,21 +32,17 @@ void StockGeo::draw() {
   // Clears the background to black
   cinder::gl::clear();
 
-  char first_stock_input[4];
-  char second_stock_input[4];
-  char third_stock_input[4];
-
   ImGui::Begin("Geometizer");
   cinder::gl::clear( 0);
   ImGui::Text("Input a Stock");
 
-  ImGui::InputText("Stock1", first_stock_input, sizeof(first_stock_input));
+  ImGui::InputText("Stock1", first_stock_input, IM_ARRAYSIZE(first_stock_input));
   ImGui::Button("Ok");
 
-  ImGui::InputText("Stock2", second_stock_input, sizeof(second_stock_input));
+  ImGui::InputText("Stock2", second_stock_input, IM_ARRAYSIZE(second_stock_input));
   ImGui::Button("Ok");
 
-  ImGui::InputText("Stock3", third_stock_input, sizeof(third_stock_input));
+  ImGui::InputText("Stock3", third_stock_input, IM_ARRAYSIZE(third_stock_input));
   ImGui::Button("Ok");
   ImGui::End();
 }
