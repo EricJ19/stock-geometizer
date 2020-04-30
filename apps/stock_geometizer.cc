@@ -15,7 +15,7 @@ namespace myapp {
 
 using cinder::app::KeyEvent;
 
-StockGeo::StockGeo() {:
+StockGeo::StockGeo() {
 }
 
 void StockGeo::setup() {

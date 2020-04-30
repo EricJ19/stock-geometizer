@@ -119,3 +119,8 @@ if(NOT nlohmann_json_POPULATED)
 endif()
 
 target_link_libraries(cinder-myapp nlohmann_json)
+
+# Links ImGui CinderBlock
+FetchContent_GetProperties(Cinder-ImGui)
+include_directories(igl::opengl_glfw_imgui)
+target_link_libraries(cinder-myapp Cinder-ImGui)

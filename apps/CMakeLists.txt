@@ -15,7 +15,7 @@ ci_make_app(
     CINDER_PATH ${CINDER_PATH}
     SOURCES     ${SOURCE_LIST}
     LIBRARIES   mylibrary
-    BLOCKS      ${CINDER_PATH}/blocks/Cinder-ImGui/
+    BLOCKS      Cinder-ImGui
 )
 
 target_compile_features(cinder-myapp PRIVATE cxx_std_14)
