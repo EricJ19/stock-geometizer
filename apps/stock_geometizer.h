@@ -13,6 +13,10 @@ class StockGeo : public cinder::app::App {
  private:
   const std::string kAPIBase = "https://finnhub.io/api/v1";
 
+  std::string first_stock_call;
+  std::string second_stock_call;
+  std::string third_stock_call;
+
   finance::FinanceData first_fin_data;
   finance::FinanceData second_fin_data;
   finance::FinanceData third_fin_data;
