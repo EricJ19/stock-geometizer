@@ -16,6 +16,7 @@ const int kWidth = 1200;
 const int kHeight = 800;
 
 void SetUp(App::Settings* settings) {
+  settings->setFrameRate(60);
   settings->setWindowSize(kWidth, kHeight);
   settings->setTitle("Stock Geometizer");
 }
