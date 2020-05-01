@@ -11,9 +11,19 @@
 #include <array>
 
 namespace myapp {
+
+// This segments the screen into different parts to put the different shape center in.
+const int kWindowSegmentNumb = 5;
+
+// Used to ensure each geometrical shape is vertically centered.
+const double kHalf = 2.0;
+
+// Mac number of geometrical shapes that can be displaced.
+const int kMaxNumbOfGeos = 3;
+
 // These are for changing the sizes of the geometrical shapes.
-const int kInnerRadius = 10;
-const int kOuterRadius = 80;
+const int kInnerRadius = 100;
+const int kOuterRadius = 175;
 
 // These distinguish which geometrical shape or finance data set
 // the code is dealing with.

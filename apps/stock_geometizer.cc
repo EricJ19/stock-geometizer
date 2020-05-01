@@ -10,7 +10,6 @@
 #include "cpr/api.h"
 #include "cpr/auth.h"
 #include "cpr/cprtypes.h"
-#include "cpr/parameters.h"
 #include "nlohmann/json.hpp"
 
 namespace myapp {
@@ -29,7 +28,7 @@ void StockGeo::update() {
 }
 
 void StockGeo::draw() {
-  // Clears the background to black
+  // Clears the background to black.
   cinder::gl::clear();
 
   CreateStockWindow();
@@ -112,15 +111,10 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
   }
 
   // Store API response in JSON format.
-  nlohmann::json json_price_quote_response = price_quote_response.text;
-  nlohmann::json json_price_metrics_response = price_metrics_response.text;
-  nlohmann::json json_growth_metrics_response = growth_metrics_response.text;
-  nlohmann::json json_recommendations_response = recommendations_response.text;
-
-  auto parse_price_quote = nlohmann::json::parse(price_quote_response.text);
-  auto parse_price_metrics = nlohmann::json::parse(price_metrics_response.text);
-  auto parse_growth_metrics = nlohmann::json::parse(price_metrics_response.text);
-  auto parse_recommendations = nlohmann::json::parse(price_metrics_response.text);
+  nlohmann::json parse_price_quote = nlohmann::json::parse(price_quote_response.text);
+  nlohmann::json parse_price_metrics = nlohmann::json::parse(price_metrics_response.text);
+  nlohmann::json parse_growth_metrics = nlohmann::json::parse(growth_metrics_response.text);
+  nlohmann::json parse_recommendations = nlohmann::json::parse(recommendations_response.text);
 
   //TODO:Finish Setting Fin Data for all 3 Data Sets.
 
@@ -129,20 +123,35 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
     case kFirstGeoNumb:
       //SetFinanceData(first_fin_data, geometry_number);
       first_fin_data.SetPriceQuote(parse_price_quote.value("o", 0));
-      for (auto& elem : parse_price_metrics.items()) {
 
-        if (elem.key() == "26WeekPriceReturnDaily") {
-          first_fin_data.Set26WkPriceReturn(elem.value());
+      for (auto& elem : parse_price_metrics.items()) {
+        if (elem.key() == "metric") {
+          nlohmann::json price_metrics = elem.value();
+          first_fin_data.Set26WkPriceReturn( price_metrics.value("26WeekPriceReturnDaily",0));
           break;
         }
       }
 
-      first_fin_data.Set3YrRevGrowthRate(parse_growth_metrics.value("epsGrowth3Y", 0));
-      first_fin_data.SetBuyRec(parse_recommendations.value("buy", 0));
-      first_fin_data.SetSellRec(parse_recommendations.value("sell", 0));
-      first_fin_data.SetHoldRec(parse_recommendations.value("hold", 0));
-      first_fin_data.SetStrongBuyRec(parse_recommendations.value("strongBuy", 0));
-      first_fin_data.SetStrongSellRec(parse_recommendations.value("strongSell", 0));
+      for (auto& elem : parse_growth_metrics.items()) {
+        if (elem.key() == "metric") {
+          nlohmann::json growth_metrics = elem.value();
+          first_fin_data.Set3YrRevGrowthRate(growth_metrics.value("epsGrowth3Y",0));
+          break;
+        }
+      }
+
+      //const std::string kDailyRecKey = "0";
+      for (auto& elem : parse_recommendations.items()) {
+        if (elem.key() == "0") {
+          nlohmann::json recommendations = elem.value();
+          first_fin_data.SetBuyRec(recommendations.value("buy", 0));
+          first_fin_data.SetSellRec(recommendations.value("sell", 0));
+          first_fin_data.SetHoldRec(recommendations.value("hold", 0));
+          first_fin_data.SetStrongBuyRec(recommendations.value("strongBuy", 0));
+          first_fin_data.SetStrongSellRec(recommendations.value("strongSell", 0));
+          break;
+        }
+      }
 
       break;
     case kSecondGeoNumb:
@@ -177,14 +186,28 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
 
 };
 
-//TODO: Utilize the geo_numb
+//TODO: Utilize the geo_numb, enforce DRY.
 
 void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
   cinder::gl::color(geo_data.GetInnerRedColor(),
                     geo_data.GetInnerBlueColor(),
                     geo_data.GetInnerGreenColor());
+
   int numb_inner_segments = geo_data.GetInnerEdgeNumber();
-  cinder::vec2 center_inner_shape = getWindowCenter();
+
+  // All Geometry are vertically centered.
+  const double kMidWindowHeight = getWindowHeight() / kHalf;
+  // Window center is the default value if geo_numb does not match.
+  const double kWindowSegmentWidth = getWindowWidth() / kWindowSegmentNumb;
+
+  cinder::vec2 center_inner_shape;
+  // Ensure geo_numb is appropriate to properly display geometry.
+  if (geo_numb <= 0 && geo_numb <= kMaxNumbOfGeos) {
+    return;
+  } else {
+    center_inner_shape = {kWindowSegmentWidth * geo_numb, kMidWindowHeight};
+  }
+
   cinder::gl::drawSolidCircle(center_inner_shape, kInnerRadius, numb_inner_segments);
 }
 
@@ -193,7 +216,20 @@ void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
                     geo_data.GetOuterBlueColor(),
                     geo_data.GetOuterGreenColor());
   int numb_outer_segments = geo_data.GetOuterEdgeNumber();
-  cinder::vec2 center_outer_shape = getWindowCenter();
+
+  // All Geometry are vertically centered.
+  const double kMidWindowHeight = getWindowHeight() / kHalf;
+  // Window center is the default value if geo_numb does not match.
+  const double kWindowSegmentWidth = getWindowWidth() / kWindowSegmentNumb;
+
+  cinder::vec2 center_outer_shape;
+  // Ensure geo_numb is appropriate to properly display geometry.
+  if (geo_numb <= 0 && geo_numb <= kMaxNumbOfGeos) {
+    return;
+  } else {
+    center_outer_shape = {kWindowSegmentWidth * geo_numb, kMidWindowHeight};
+  }
+
   cinder::gl::drawSolidCircle(center_outer_shape, kOuterRadius, numb_outer_segments);
 }
 
