@@ -38,6 +38,8 @@
    
  - **5/1/20** Developed functioning UI and API, and improved object decomposition.
     - Created logic to parse API calls and store data in FinanceData objects.
+    - There was a previous issue that the inner and outer shapes for the Geometry class covered up
+    each other in the UI. This has been fixed.
     - Created logic for building multiple geometrical shapes based on which textfield user interacted with.
     - Now, UI displays custom geometry, changing edge numbers and colors based on user's stock input 
     and API response.
@@ -45,6 +47,7 @@
     - Fine tune Geometry class variables and functions for more clear data visualization.
     - Still need to fine tune geometrical colors/edge numbers for greater clarity and further
      decompose some repetitive code.
+
    
    
    
