@@ -46,7 +46,6 @@ void StockGeo::CreateStockWindow() {
   // Allows user to input up to three different stocks.
   ImGui::InputText("Stock1", first_input_chars, IM_ARRAYSIZE(first_input_chars));
   if (ImGui::Button("Ok")) {
-    int numb_segments = 100;
     // Set user input into string to be used for API calls
     first_input_str = first_input_chars;
     ReceiveAPICallData(first_input_str);

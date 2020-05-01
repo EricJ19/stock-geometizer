@@ -21,18 +21,21 @@
    - Completed implementations of Geometry class
    - Refactored various file names
    
- - **4/27/20** Fix Library Integration Issues and Interact with API Calls
+ - **4/27/20** Fixed Library Integration Issues and Interact with API Calls
    - Fixed OpenSSL (used with CPR) issues in CMake
    - Included nlohmann_json library
    
- - **4/29/20** Add Cinder Blocks and Develop UI
+ - **4/29/20** Added Cinder Blocks and Develop UI
    - Incorporated ImGui CinderBlock for accepting user inputs to make API calls
    - Created Window using ImGui to accept user inputs. This is used to create custom API calls for 
    whatever stock the user chooses.
    
- - **4/30/20** Develop UI Interaction Between User and Geometry
+ - **4/30/20** Developed UI Interaction Between User and Geometry and created logic for storing
+ data from API calls
     - Connect user inputs from ImGui window into FinanceData and Geometry classes
     - Display custom geometry based on user inputs onto UI.
+    - Created logic for using user input to create custom API calls.
+    - Created Variables to store API calls data.
    
    
    
