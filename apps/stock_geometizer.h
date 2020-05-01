@@ -11,6 +11,10 @@
 #include <array>
 
 namespace myapp {
+//const int kFirst = 1;
+//const int kSecond = 2;
+//const int kThird = 3;
+
 // This is for the base URL for all API calls.
 const std::string kAPIBase = "https://finnhub.io/api/v1";
 

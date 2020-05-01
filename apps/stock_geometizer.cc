@@ -72,17 +72,32 @@ void StockGeo::DrawGeo() {
 
 void StockGeo::ReceiveAPICallData(const std::string& user_input) {
   // Custom API calls based on user inputs.
-  cpr::Response metrics_response;
+  cpr::Response price_quote_response;
+  cpr::Response price_metrics_response;
+  cpr::Response growth_metrics_response;
+  cpr::Response recommendations_response;
+  
   try {
-    metrics_response
-      = cpr::Get(cpr::Url{kMetricsBeginURL + user_input
-                          + "&freq=annual&token=" + kAPIKey});
+    price_quote_response = cpr::Get(cpr::Url{
+        kPriceQuoteBeginURL + user_input + kPriceQuoteEndURL});
+
+    price_metrics_response = cpr::Get(cpr::Url{
+        kMetricsBeginURL + user_input + kPriceMetricEndURL});
+
+    growth_metrics_response = cpr::Get(cpr::Url{
+        kMetricsBeginURL + user_input + kGrowthMetricEndURL});
+
+    recommendations_response = cpr::Get(cpr::Url{
+        kRecommendationBeginURL + user_input + kRecommendationsEndURL});
   } catch (std::exception& e) {
     //TODO:Handle more gracefully.
     return;
   }
 
-  nlohmann::json json_response = metrics_response.text;
+  nlohmann::json json_price_quote_response = price_quote_response.text;
+  nlohmann::json json_price_metrics_response = price_metrics_response.text;
+  nlohmann::json json_growth_metrics_response = growth_metrics_response.text;
+  nlohmann::json json_recommendations_response = recommendations_response.text;
 }
 
 }  // namespace myapp
