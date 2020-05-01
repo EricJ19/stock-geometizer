@@ -2,7 +2,7 @@
 
  - **4/18/20** Cloned Git Repository and begin CPR integration
    - Asked on piazza for clarification in creating submodules
-   - Still have to complete library integration
+   - Still have to complete CPR library integration
    
  - **4/19/20** Continued integrating CPR library
    - Executed terminal commands to include submodule
@@ -33,10 +33,18 @@
  - **4/30/20** Developed UI Interaction Between User and Geometry and created logic for storing
  data from API calls
     - Connect user inputs from ImGui window into FinanceData and Geometry classes
-    - Display custom geometry based on user inputs onto UI.
     - Created logic for using user input to create custom API calls.
-    - Created Variables to store API calls data.
+    - Created variables to store custom API call data.
    
+ - **5/1/20** Developed functioning UI and API, and improved object decomposition.
+    - Created logic to parse API calls and store data in FinanceData objects.
+    - Created logic for building multiple geometrical shapes based on which textfield user interacted with.
+    - Now, UI displays custom geometry, changing edge numbers and colors based on user's stock input 
+    and API response.
+    - Created various helper functions for better object decomposition.
+    - Fine tune Geometry class variables and functions for more clear data visualization.
+    - Still need to fine tune geometrical colors/edge numbers for greater clarity and further
+     decompose some repetitive code.
    
    
    
