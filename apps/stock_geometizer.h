@@ -11,9 +11,11 @@
 #include <array>
 
 namespace myapp {
-//const int kFirst = 1;
-//const int kSecond = 2;
-//const int kThird = 3;
+// These distinguish which geometrical shape or finance data set
+// the code is dealing with.
+const int kFirstGeoNumb = 1;
+const int kSecondGeoNumb = 2;
+const int kThirdGeoNumb = 3;
 
 // This is for the base URL for all API calls.
 const std::string kAPIBase = "https://finnhub.io/api/v1";
@@ -75,8 +77,14 @@ class StockGeo : public cinder::app::App {
   void CreateStockWindow();
   void DrawGeo();
   // user_input is the input to the ImGui::InputText
-  void ReceiveAPICallData(const std::string& user_input);
-  //void SetFinanceData(finance::FinanceData fin_data, );
+  // geometry_number represents which geometry from which call being analyzed
+  // from 1 to 3.
+  void ReceiveAPICallData(const std::string& user_input, int geometry_number);
+  // fin_data represents which financial data set (ex. first_fin_data) is
+  // being analyazed (this corresponds to geometry).
+  // geometry_number represents which geometry from which call being analyzed
+  // from 1 to 3.
+  void SetFinanceData(finance::FinanceData& fin_data, int geometry_number);
 };
 
 //int callback(ImGuiTextEditCallbackData* data);
