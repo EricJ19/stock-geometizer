@@ -9,6 +9,7 @@
 #include <mylibrary/finance_geometry.h>
 
 #include <array>
+#include <nlohmann/json.hpp>
 
 namespace myapp {
 
@@ -90,18 +91,38 @@ class StockGeo : public cinder::app::App {
   //void SetUserInputToString(std::string input_str, std::vector<char> input_chars);
   void CreateStockWindow();
   void DrawGeo();
+
+  // Calls and Receives API data, storing them in FinanceData and Geometry objects.
   // user_input is the input to the ImGui::InputText
   // geometry_number represents which geometry from which call being analyzed
   // from 1 to 3.
   void ReceiveAPICallData(const std::string& user_input, int geometry_number);
+
+  // Using the responses from API calls, populates FinanceData object fields.
   // fin_data represents which financial data set (ex. first_fin_data) is
-  // being analyazed (this corresponds to geometry).
-  // geometry_data represents which geometry data set being analyzed.
+  // being analyzed (this corresponds to which geometry is being analyzed).
+  // parse_price_quote - API JSON response for price quote.
+  // parse_price_metrics - API JSON response for price metrics.
+  // parse_growth_metrics - API JSON response for growth metrics.
+  // parse_recommendations - API JSON response for recommendations.
+  // fin_data is modified based on API calls.
   void SetFinanceData(finance::FinanceData& fin_data,
+                      const nlohmann::json& parse_price_quote,
+                      const nlohmann::json& parse_price_metrics,
+                      const nlohmann::json& parse_growth_metrics,
+                      const nlohmann::json & parse_recommendations);
+
+  // Sets color and edge number of inner and outer shape of a shape.
+  // fin_data represents which financial data set is being analyazed.
+  // geometry_data represents which geometry data set being analyzed.
+  // geo_data is modified based on fin_data.
+  void SetGeoData(finance::FinanceData& fin_data,
                       geometry::Geometry& geo_data);
+
   // geometry_data represents which geometry data set being analyzed.
   // geo_number represents which geometry shape is being analyzed (from 1 to 3)
   void DrawInnerShape(geometry::Geometry& geo_data, int geo_numb);
+
   // geometry_data represents which geometry data set being analyzed.
   // geo_number represents which geometry shape is being analyzed (from 1 to 3)
   void DrawOuterShape(geometry::Geometry& geo_data, int geo_numb);

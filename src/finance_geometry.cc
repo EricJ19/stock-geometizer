@@ -46,9 +46,9 @@ void geometry::Geometry::SetOuterColors(double price_quote,
   // Scales values to between 0 and 1.
   double scaled_red = (unscaled_red - kMinGrowthRate)
                     / (kMaxRecNumb - kMinGrowthRate);
-  double scaled_green = (unscaled_red - kMinGrowthRate)
+  double scaled_green = (unscaled_green - kMinGrowthRate)
                         / (kMaxRecNumb - kMinGrowthRate);
-  double scaled_blue = (unscaled_red - kMinGrowthRate)
+  double scaled_blue = (unscaled_blue - kMinGrowthRate)
                        / (kMaxRecNumb - kMinGrowthRate);
 
   outer_red_value = scaled_red;

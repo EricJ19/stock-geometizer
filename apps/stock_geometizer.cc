@@ -70,9 +70,9 @@ void StockGeo::DrawGeo() {
 
   cinder::gl::enableAlphaBlending();
 
-  SetFinanceData(first_fin_data, first_geo);
-//  SetFinanceData(second_fin_data, second_geo);
-//  SetFinanceData(third_fin_data, third_geo);
+  SetGeoData(first_fin_data, first_geo);
+//  SetGeoData(second_fin_data, second_geo);
+//  SetGeoData(third_fin_data, third_geo);
 
   //TODO: Make Color Transparent.
 
@@ -121,7 +121,7 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
   // Populate the respective finance data set.
   switch(geometry_number) {
     case kFirstGeoNumb:
-      //SetFinanceData(first_fin_data, geometry_number);
+      //SetGeoData(first_fin_data, geometry_number);
       first_fin_data.SetPriceQuote(parse_price_quote.value("o", 0));
 
       for (auto& elem : parse_price_metrics.items()) {
@@ -155,15 +155,23 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
 
       break;
     case kSecondGeoNumb:
-      //SetFinanceData(second_fin_data, geometry_number);
+      //SetGeoData(second_fin_data, geometry_number);
       break;
     case kThirdGeoNumb:
-      //SetFinanceData(third_fin_data, geometry_number);
+      //SetGeoData(third_fin_data, geometry_number);
       break;
   }
 }
 
 void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
+                    const nlohmann::json& parse_price_quote,
+                    const nlohmann::json& parse_price_metrics,
+                    const nlohmann::json& parse_growth_metrics,
+                    const nlohmann::json & parse_recommendations) {
+  
+}
+
+void StockGeo::SetGeoData(finance::FinanceData& fin_data,
                               geometry::Geometry& geo_data ) {
   geo_data.SetInnerColors(fin_data.GetBuyRec(),
                            fin_data.GetSellRec(),
