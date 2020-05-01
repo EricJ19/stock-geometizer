@@ -67,6 +67,7 @@ void StockGeo::CreateStockWindow() {
 }
 
 void StockGeo::DrawGeo() {
+  
 
 }
 
@@ -101,16 +102,37 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
   nlohmann::json json_growth_metrics_response = growth_metrics_response.text;
   nlohmann::json json_recommendations_response = recommendations_response.text;
 
+  auto parse_price_quote = nlohmann::json::parse(price_quote_response.text);
+  auto parse_price_metrics = nlohmann::json::parse(price_metrics_response.text);
+  auto parse_growth_metrics = nlohmann::json::parse(price_metrics_response.text);
+  auto parse_recommendations = nlohmann::json::parse(price_metrics_response.text);
+
+
   // Populate the respective finance data set.
   switch(geometry_number) {
     case kFirstGeoNumb:
-      SetFinanceData(first_fin_data, geometry_number);
+      //SetFinanceData(first_fin_data, geometry_number);
+      first_fin_data.SetPriceQuote(parse_price_quote.value("o", 0));
+      for (auto& elem : parse_price_metrics["metrics"]) {
+
+        if (elem == "26WeekPriceReturnDaily") {
+          first_fin_data.Set26WkPriceReturn(elem.value("26WeekPriceReturnDaily", 0));
+        }
+      }
+
+      first_fin_data.Set3YrRevGrowthRate(parse_growth_metrics.value("epsGrowth3Y", 0));
+      first_fin_data.SetBuyRec(parse_recommendations.value("buy", 0));
+      first_fin_data.SetSellRec(parse_recommendations.value("sell", 0));
+      first_fin_data.SetHoldRec(parse_recommendations.value("hold", 0));
+      first_fin_data.SetStrongBuyRec(parse_recommendations.value("strongBuy", 0));
+      first_fin_data.SetStrongSellRec(parse_recommendations.value("strongSell", 0));
+
       break;
     case kSecondGeoNumb:
-      SetFinanceData(first_fin_data, geometry_number);
+      //SetFinanceData(second_fin_data, geometry_number);
       break;
     case kThirdGeoNumb:
-      SetFinanceData(first_fin_data, geometry_number);
+      //SetFinanceData(third_fin_data, geometry_number);
       break;
   }
 }
