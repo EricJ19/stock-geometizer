@@ -22,7 +22,7 @@ class Geometry {
   // "double" type is used for division with other double values.
 
   // Max Rec is arbitrarily large.
-  const double kMaxRecNumb = 35;
+  const double kMaxRecNumb = 30;
   // Max and Min Growth Rate are for _26_wk_price_return and
   // _3_yr_rev_growth_rate. These are arbitrarily and small percentages.
   const double kMinGrowthRate = -120;
@@ -31,8 +31,8 @@ class Geometry {
   // Outer edge number is larger than inner as
   // outer shape is related to percentage, which has larger range
   // than recommendation number used for inner edge number.
-  const double kMaxOuterEdgeNumb = 30;
-  const double kMaxInnerEdgeNumb = 10;
+  const double kMaxOuterEdgeNumb = 7;
+  const double kMaxInnerEdgeNumb = 7;
   // Minimum polygon shape is a triangle.
   const double kMinEdgeNumb = 3;
 
