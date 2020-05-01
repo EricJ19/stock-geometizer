@@ -25,8 +25,7 @@ void StockGeo::setup() {
 }
 
 void StockGeo::update() {
-  cpr::Response response = cpr::Get(cpr::Url{"https://finnhub.io/api/v1/stock/eps-estimate?symbol=AMZN&freq=annual&token=bqhl2s7rh5rdcs9r2ovg"});
-  nlohmann::json json_response = response.text;
+
 }
 
 void StockGeo::draw() {
@@ -50,16 +49,19 @@ void StockGeo::CreateStockWindow() {
     int numb_segments = 100;
     // Set user input into string to be used for API calls
     first_input_str = first_input_chars;
+    ReceiveAPICallData(first_input_str);
   }
 
   ImGui::InputText("Stock2", second_input_chars, IM_ARRAYSIZE(second_input_chars));
   if (ImGui::Button("Ok")) {
     second_input_str = second_input_chars;
+    ReceiveAPICallData(second_input_str);
   }
 
   ImGui::InputText("Stock3", third_input_chars, IM_ARRAYSIZE(third_input_chars));
   if (ImGui::Button("Ok")) {
     third_input_str = second_input_chars;
+    ReceiveAPICallData(third_input_str);
   }
 
   ImGui::End();
@@ -67,6 +69,21 @@ void StockGeo::CreateStockWindow() {
 
 void StockGeo::DrawGeo() {
 
+}
+
+void StockGeo::ReceiveAPICallData(const std::string& user_input) {
+  // Custom API calls based on user inputs.
+  cpr::Response metrics_response;
+  try {
+    metrics_response
+      = cpr::Get(cpr::Url{kMetricsBeginURL + user_input
+                          + "&freq=annual&token=" + kAPIKey});
+  } catch (std::exception& e) {
+    //TODO:Handle more gracefully.
+    return;
+  }
+
+  nlohmann::json json_response = metrics_response.text;
 }
 
 }  // namespace myapp

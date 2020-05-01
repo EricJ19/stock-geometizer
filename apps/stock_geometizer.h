@@ -11,11 +11,38 @@
 #include <array>
 
 namespace myapp {
+// This is for the base URL for all API calls.
+const std::string kAPIBase = "https://finnhub.io/api/v1";
+
+// Key to use finhubb.io API
+const std::string kAPIKey = "bqhl2s7rh5rdcs9r2ovg";
+
+// Beginning of URLs for different API calls for finance metrics.
+
+// Beginning call for data on price quote of stock.
+const std::string kPriceQuoteBeginURL = kAPIBase + "/quote?symbol=";
+// Beginning (as user's input splits the full URL) call for data on
+// 26 Week Price Return and 3 Year Revenue Growth Rate.
+const std::string kMetricsBeginURL = kAPIBase + "/stock/metric?symbol=";
+// Beginning call for data on number of:
+// buy, sell, hold, strong buy, and strong sell recommendations.
+const std::string kRecommendationBeginURL = kAPIBase
+                                          + "/stock/recommendation?symbol=";
+
+// Ending of URLs for different API calls for finance metrics.
+
+// Used for Price Quote.
+const std::string kPriceQuoteEndURL = "&token=" + kAPIKey;
+// Used for 26 Week price return.
+const std::string kPriceMetricEndURL = "&metric=price&token=" + kAPIKey;
+// Used for 3 year growth rate.
+const std::string kGrowthMetricEndURL = "&metric=growth&token=" + kAPIKey;
+// Used for buy, sell, hold, strong buy, and strong sell recommendations.
+const std::string kRecommendationsEndURL = "&token=" + kAPIKey;
 
 class StockGeo : public cinder::app::App {
  private:
-  const std::string kAPIBase = "https://finnhub.io/api/v1";
-
+  //TODO:: Try to change these to vectors or some other wrapper.
   // These are for ImGui Window
   char first_input_chars[5];
   char second_input_chars[5];
@@ -43,9 +70,12 @@ class StockGeo : public cinder::app::App {
   //void SetUserInputToString(std::string input_str, std::vector<char> input_chars);
   void CreateStockWindow();
   void DrawGeo();
+  // user_input is the input to the ImGui::InputText
+  void ReceiveAPICallData(const std::string& user_input);
+  //void SetFinanceData(finance::FinanceData fin_data, );
 };
 
-int callback(ImGuiTextEditCallbackData* data);
+//int callback(ImGuiTextEditCallbackData* data);
 
 }  // namespace myapp
 
