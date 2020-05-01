@@ -26,8 +26,8 @@ void StockGeo::setup() {
 void StockGeo::update() {
   // Updates finance data based on last API responses to each ImGui::InputText.
   SetGeoData(first_fin_data, first_geo);
-  SetGeoData(second_fin_data, second_geo);
-  SetGeoData(third_fin_data, third_geo);
+  //SetGeoData(second_fin_data, second_geo);
+  //SetGeoData(third_fin_data, third_geo);
 }
 
 void StockGeo::draw() {
@@ -64,7 +64,7 @@ void StockGeo::CreateStockWindow() {
 
   ImGui::InputText("Stock3", third_input_chars, IM_ARRAYSIZE(third_input_chars));
   if (ImGui::Button("Ok")) {
-    third_input_str = second_input_chars;
+    third_input_str = third_input_chars;
     ReceiveAPICallData(third_input_str, kThirdGeoNumb);
   }
 
@@ -75,13 +75,16 @@ void StockGeo::DrawGeo() {
   //TODO: Finish Creating Geometry for all 3 Data Sets.
   //TODO: Make Color Transparent.
 
-  DrawInnerShape(first_geo, kFirstGeoNumb);
-  DrawInnerShape(second_geo, kSecondGeoNumb);
-  DrawInnerShape(third_geo, kThirdGeoNumb);
+  // Note: Outer shape is drawn first so that the inner
+  // shape drawn on top outer shape or else cover by the outer shape.
 
   DrawOuterShape(first_geo, kFirstGeoNumb);
-  DrawOuterShape(second_geo, kSecondGeoNumb);
-  DrawOuterShape(third_geo, kThirdGeoNumb);
+  //DrawOuterShape(second_geo, kSecondGeoNumb);
+  //DrawOuterShape(third_geo, kThirdGeoNumb);
+
+  DrawInnerShape(first_geo, kFirstGeoNumb);
+  //DrawInnerShape(second_geo, kSecondGeoNumb);
+  //DrawInnerShape(third_geo, kThirdGeoNumb);
 }
 
 void StockGeo::ReceiveAPICallData(const std::string& user_input,
@@ -127,6 +130,8 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
   // ImGui::Button was clicked.
   finance::FinanceData& finance_set_to_modify = FindFinSetToAnalyze(geo_numb);
 
+  // Modify finance data set based on API responses and
+  // which ImGui::InputText user changed.
   SetFinanceData(finance_set_to_modify,
                  parse_price_quote,
                  parse_price_metrics,

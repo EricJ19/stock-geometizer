@@ -24,8 +24,8 @@ const double kHalf = 2.0;
 const int kMaxNumbOfGeos = 3;
 
 // These are for changing the sizes of the geometrical shapes.
-const int kInnerRadius = 100;
-const int kOuterRadius = 175;
+const int kInnerRadius = 150;
+const int kOuterRadius = 220;
 
 // These distinguish which geometrical shape or finance data set
 // the code is dealing with.
