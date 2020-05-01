@@ -67,8 +67,34 @@ void StockGeo::CreateStockWindow() {
 }
 
 void StockGeo::DrawGeo() {
-  
+  first_geo.SetInnerColors(first_fin_data.GetBuyRec(),
+                           first_fin_data.GetSellRec(),
+                           first_fin_data.GetHoldRec(),
+                           first_fin_data.GetStrongBuyRec(),
+                           first_fin_data.GetStrongSellRec());
 
+  first_geo.SetOuterColors(first_fin_data.GetPriceQuote(),
+                           first_fin_data.Get26WkPriceReturn(),
+                           first_fin_data.Get3YrRevGrowthRate());
+
+  first_geo.SetInnerEdges(first_fin_data.GetBuyRec(),
+                          first_fin_data.GetSellRec(),
+                          first_fin_data.GetStrongBuyRec(),
+                          first_fin_data.GetStrongSellRec());
+
+  first_geo.SetOuterEdges(first_fin_data.GetPriceQuote(),
+                          first_fin_data.Get26WkPriceReturn(),
+                          first_fin_data.Get3YrRevGrowthRate());
+
+  // Inner Shape.
+  int numb_inner_segments = first_geo.GetInnerEdgeNumber();
+  cinder::vec2 center_inner_shape = getWindowCenter();
+  cinder::gl::drawSolidCircle(center_inner_shape, kInnerRadius, numb_inner_segments);
+
+  // Outer Shape.
+  int numb_outer_segments = first_geo.GetOuterEdgeNumber();
+  cinder::vec2 center_outer_shape = getWindowCenter();
+  cinder::gl::drawSolidCircle(center_outer_shape, kOuterRadius, numb_outer_segments);
 }
 
 void StockGeo::ReceiveAPICallData(const std::string& user_input,
@@ -113,10 +139,11 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
     case kFirstGeoNumb:
       //SetFinanceData(first_fin_data, geometry_number);
       first_fin_data.SetPriceQuote(parse_price_quote.value("o", 0));
-      for (auto& elem : parse_price_metrics["metrics"]) {
+      for (auto& elem : parse_price_metrics.items()) {
 
-        if (elem == "26WeekPriceReturnDaily") {
-          first_fin_data.Set26WkPriceReturn(elem.value("26WeekPriceReturnDaily", 0));
+        if (elem.key() == "26WeekPriceReturnDaily") {
+          first_fin_data.Set26WkPriceReturn(elem.value());
+          break;
         }
       }
 

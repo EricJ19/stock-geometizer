@@ -11,6 +11,10 @@
 #include <array>
 
 namespace myapp {
+// These are for changing the sizes of the geometrical shapes.
+const int kInnerRadius = 10;
+const int kOuterRadius = 80;
+
 // These distinguish which geometrical shape or finance data set
 // the code is dealing with.
 const int kFirstGeoNumb = 1;
