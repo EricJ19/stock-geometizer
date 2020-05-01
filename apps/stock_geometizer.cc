@@ -67,6 +67,10 @@ void StockGeo::CreateStockWindow() {
 }
 
 void StockGeo::DrawGeo() {
+  //TODO:Finish Creating Geometry for all 3 Data Sets.
+
+  cinder::gl::enableAlphaBlending();
+
   first_geo.SetInnerColors(first_fin_data.GetBuyRec(),
                            first_fin_data.GetSellRec(),
                            first_fin_data.GetHoldRec(),
@@ -87,11 +91,17 @@ void StockGeo::DrawGeo() {
                           first_fin_data.Get3YrRevGrowthRate());
 
   // Inner Shape.
+  cinder::gl::color(first_geo.GetInnerRedColor(),
+                    first_geo.GetInnerBlueColor(),
+                    first_geo.GetInnerGreenColor());
   int numb_inner_segments = first_geo.GetInnerEdgeNumber();
   cinder::vec2 center_inner_shape = getWindowCenter();
   cinder::gl::drawSolidCircle(center_inner_shape, kInnerRadius, numb_inner_segments);
 
   // Outer Shape.
+  cinder::gl::color(first_geo.GetOuterRedColor(),
+                    first_geo.GetOuterBlueColor(),
+                    first_geo.GetOuterGreenColor());
   int numb_outer_segments = first_geo.GetOuterEdgeNumber();
   cinder::vec2 center_outer_shape = getWindowCenter();
   cinder::gl::drawSolidCircle(center_outer_shape, kOuterRadius, numb_outer_segments);
@@ -133,6 +143,7 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
   auto parse_growth_metrics = nlohmann::json::parse(price_metrics_response.text);
   auto parse_recommendations = nlohmann::json::parse(price_metrics_response.text);
 
+  //TODO:Finish Setting Fin Data for all 3 Data Sets.
 
   // Populate the respective finance data set.
   switch(geometry_number) {
