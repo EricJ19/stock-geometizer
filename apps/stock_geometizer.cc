@@ -86,8 +86,9 @@ void StockGeo::DrawGeo() {
 }
 
 void StockGeo::ReceiveAPICallData(const std::string& user_input,
-                                  int geometry_number) {
-  // Custom API calls based on user inputs.
+                                  int geo_numb) {
+  // API calls for financial data.
+  // Specific stock being called is custom, based on user inputs.
   cpr::Response price_quote_response;
   cpr::Response price_metrics_response;
   cpr::Response growth_metrics_response;
@@ -111,55 +112,38 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
   }
 
   // Store API response in JSON format.
-  nlohmann::json parse_price_quote = nlohmann::json::parse(price_quote_response.text);
-  nlohmann::json parse_price_metrics = nlohmann::json::parse(price_metrics_response.text);
-  nlohmann::json parse_growth_metrics = nlohmann::json::parse(growth_metrics_response.text);
-  nlohmann::json parse_recommendations = nlohmann::json::parse(recommendations_response.text);
+  nlohmann::json parse_price_quote
+    = nlohmann::json::parse(price_quote_response.text);
 
-  //TODO:Finish Setting Fin Data for all 3 Data Sets.
+  nlohmann::json parse_price_metrics
+    = nlohmann::json::parse(price_metrics_response.text);
 
-  // Populate the respective finance data set.
-  switch(geometry_number) {
-    case kFirstGeoNumb:
-      //SetGeoData(first_fin_data, geometry_number);
-      first_fin_data.SetPriceQuote(parse_price_quote.value("o", 0));
+  nlohmann::json parse_growth_metrics
+    = nlohmann::json::parse(growth_metrics_response.text);
 
-      for (auto& elem : parse_price_metrics.items()) {
-        if (elem.key() == "metric") {
-          nlohmann::json price_metrics = elem.value();
-          first_fin_data.Set26WkPriceReturn( price_metrics.value("26WeekPriceReturnDaily",0));
-          break;
-        }
-      }
+  nlohmann::json parse_recommendations
+    = nlohmann::json::parse(recommendations_response.text);
 
-      for (auto& elem : parse_growth_metrics.items()) {
-        if (elem.key() == "metric") {
-          nlohmann::json growth_metrics = elem.value();
-          first_fin_data.Set3YrRevGrowthRate(growth_metrics.value("epsGrowth3Y",0));
-          break;
-        }
-      }
+  // Determine which finance data set to modify based on which
+  // ImGui::Button was clicked.
+  finance::FinanceData& finance_set_to_modify = FindFinSetToAnalyze(geo_numb);
 
-      //const std::string kDailyRecKey = "0";
-      for (auto& elem : parse_recommendations.items()) {
-        if (elem.key() == "0") {
-          nlohmann::json recommendations = elem.value();
-          first_fin_data.SetBuyRec(recommendations.value("buy", 0));
-          first_fin_data.SetSellRec(recommendations.value("sell", 0));
-          first_fin_data.SetHoldRec(recommendations.value("hold", 0));
-          first_fin_data.SetStrongBuyRec(recommendations.value("strongBuy", 0));
-          first_fin_data.SetStrongSellRec(recommendations.value("strongSell", 0));
-          break;
-        }
-      }
+  SetFinanceData(finance_set_to_modify,
+                 parse_price_quote,
+                 parse_price_metrics,
+                 parse_growth_metrics,
+                 parse_recommendations);
+}
 
-      break;
-    case kSecondGeoNumb:
-      //SetGeoData(second_fin_data, geometry_number);
-      break;
-    case kThirdGeoNumb:
-      //SetGeoData(third_fin_data, geometry_number);
-      break;
+finance::FinanceData& StockGeo::FindFinSetToAnalyze(const int &geo_numb) {
+  if (geo_numb == kFirstGeoNumb) {
+    return first_fin_data;
+  } else if (geo_numb == kSecondGeoNumb) {
+    return second_fin_data;
+  } else if (geo_numb == kThirdGeoNumb) {
+    return third_fin_data;
+  } else {
+    throw std::string("Invalid Geometry Number");
   }
 }
 
@@ -168,7 +152,36 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
                     const nlohmann::json& parse_price_metrics,
                     const nlohmann::json& parse_growth_metrics,
                     const nlohmann::json & parse_recommendations) {
-  
+  fin_data.SetPriceQuote(parse_price_quote.value("o", 0));
+
+  for (auto& elem : parse_price_metrics.items()) {
+    if (elem.key() == "metric") {
+      nlohmann::json price_metrics = elem.value();
+      fin_data.Set26WkPriceReturn( price_metrics.value("26WeekPriceReturnDaily",0));
+      break;
+    }
+  }
+
+  for (auto& elem : parse_growth_metrics.items()) {
+    if (elem.key() == "metric") {
+      nlohmann::json growth_metrics = elem.value();
+      fin_data.Set3YrRevGrowthRate(growth_metrics.value("epsGrowth3Y",0));
+      break;
+    }
+  }
+
+  //const std::string kDailyRecKey = "0";
+  for (auto& elem : parse_recommendations.items()) {
+    if (elem.key() == "0") {
+      nlohmann::json recommendations = elem.value();
+      fin_data.SetBuyRec(recommendations.value("buy", 0));
+      fin_data.SetSellRec(recommendations.value("sell", 0));
+      fin_data.SetHoldRec(recommendations.value("hold", 0));
+      fin_data.SetStrongBuyRec(recommendations.value("strongBuy", 0));
+      fin_data.SetStrongSellRec(recommendations.value("strongSell", 0));
+      break;
+    }
+  }
 }
 
 void StockGeo::SetGeoData(finance::FinanceData& fin_data,
@@ -191,7 +204,6 @@ void StockGeo::SetGeoData(finance::FinanceData& fin_data,
   geo_data.SetOuterEdges(fin_data.GetPriceQuote(),
                           fin_data.Get26WkPriceReturn(),
                           fin_data.Get3YrRevGrowthRate());
-
 };
 
 //TODO: Utilize the geo_numb, enforce DRY.
