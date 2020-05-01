@@ -103,13 +103,13 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
 
   // Populate the respective finance data set.
   switch(geometry_number) {
-    case 1:
+    case kFirstGeoNumb:
       SetFinanceData(first_fin_data, geometry_number);
       break;
-    case 2:
+    case kSecondGeoNumb:
       SetFinanceData(first_fin_data, geometry_number);
       break;
-    case 3:
+    case kThirdGeoNumb:
       SetFinanceData(first_fin_data, geometry_number);
       break;
   }
@@ -117,7 +117,7 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
 
 void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
                               int geometry_number) {
-  
+
 };
 
 }  // namespace myapp
