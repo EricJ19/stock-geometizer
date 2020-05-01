@@ -30,7 +30,9 @@
    - Created Window using ImGui to accept user inputs. This is used to create custom API calls for 
    whatever stock the user chooses.
    
-   
+ - **4/30/20** Develop UI Interaction Between User and Geometry
+    - Connect user inputs from ImGui window into FinanceData and Geometry classes
+    - Display custom geometry based on user inputs onto UI.
    
    
    

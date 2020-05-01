@@ -3,6 +3,7 @@
 #include "stock_geometizer.h"
 
 #include <cinder/app/App.h>
+#include <cinder/gl/draw.h>
 #include <cinder/gl/wrapper.h>
 
 #include "../blocks/Cinder-ImGui/include/CinderImGui.h"
@@ -32,21 +33,40 @@ void StockGeo::draw() {
   // Clears the background to black
   cinder::gl::clear();
 
-  ImGui::Begin("Geometizer");
-  cinder::gl::clear( 0);
-  ImGui::Text("Input a Stock");
-
-  ImGui::InputText("Stock1", first_stock_input, IM_ARRAYSIZE(first_stock_input));
-  ImGui::Button("Ok");
-
-  ImGui::InputText("Stock2", second_stock_input, IM_ARRAYSIZE(second_stock_input));
-  ImGui::Button("Ok");
-
-  ImGui::InputText("Stock3", third_stock_input, IM_ARRAYSIZE(third_stock_input));
-  ImGui::Button("Ok");
-  ImGui::End();
+  CreateStockWindow();
+  DrawGeo();
 }
 
 void StockGeo::keyDown(KeyEvent event) { }
+
+void StockGeo::CreateStockWindow() {
+  ImGui::Begin("Geometizer");
+
+  ImGui::Text("Input a Stock");
+
+  // Allows user to input up to three different stocks.
+  ImGui::InputText("Stock1", first_input_chars, IM_ARRAYSIZE(first_input_chars));
+  if (ImGui::Button("Ok")) {
+    int numb_segments = 100;
+    // Set user input into string to be used for API calls
+    first_input_str = first_input_chars;
+  }
+
+  ImGui::InputText("Stock2", second_input_chars, IM_ARRAYSIZE(second_input_chars));
+  if (ImGui::Button("Ok")) {
+    second_input_str = second_input_chars;
+  }
+
+  ImGui::InputText("Stock3", third_input_chars, IM_ARRAYSIZE(third_input_chars));
+  if (ImGui::Button("Ok")) {
+    third_input_str = second_input_chars;
+  }
+
+  ImGui::End();
+}
+
+void StockGeo::DrawGeo() {
+
+}
 
 }  // namespace myapp
