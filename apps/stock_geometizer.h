@@ -86,9 +86,16 @@ class StockGeo : public cinder::app::App {
   void ReceiveAPICallData(const std::string& user_input, int geometry_number);
   // fin_data represents which financial data set (ex. first_fin_data) is
   // being analyazed (this corresponds to geometry).
-  // geometry_number represents which geometry from which call being analyzed
-  // from 1 to 3.
-  void SetFinanceData(finance::FinanceData& fin_data, int geometry_number);
+  // geometry_data represents which geometry data set being analyzed.
+  void SetFinanceData(finance::FinanceData& fin_data,
+                      geometry::Geometry& geo_data);
+  // geometry_data represents which geometry data set being analyzed.
+  // geo_number represents which geometry shape is being analyzed (from 1 to 3)
+  void DrawInnerShape(geometry::Geometry& geo_data, int geo_numb);
+  // geometry_data represents which geometry data set being analyzed.
+  // geo_number represents which geometry shape is being analyzed (from 1 to 3)
+  void DrawOuterShape(geometry::Geometry& geo_data, int geo_numb);
+
 };
 
 //int callback(ImGuiTextEditCallbackData* data);

@@ -71,40 +71,19 @@ void StockGeo::DrawGeo() {
 
   cinder::gl::enableAlphaBlending();
 
-  first_geo.SetInnerColors(first_fin_data.GetBuyRec(),
-                           first_fin_data.GetSellRec(),
-                           first_fin_data.GetHoldRec(),
-                           first_fin_data.GetStrongBuyRec(),
-                           first_fin_data.GetStrongSellRec());
+  SetFinanceData(first_fin_data, first_geo);
+//  SetFinanceData(second_fin_data, second_geo);
+//  SetFinanceData(third_fin_data, third_geo);
 
-  first_geo.SetOuterColors(first_fin_data.GetPriceQuote(),
-                           first_fin_data.Get26WkPriceReturn(),
-                           first_fin_data.Get3YrRevGrowthRate());
+  //TODO: Make Color Transparent.
 
-  first_geo.SetInnerEdges(first_fin_data.GetBuyRec(),
-                          first_fin_data.GetSellRec(),
-                          first_fin_data.GetStrongBuyRec(),
-                          first_fin_data.GetStrongSellRec());
+  DrawInnerShape(first_geo, kFirstGeoNumb);
+  //DrawInnerShape(second_geo, kSecondGeoNumb);
+  //DrawInnerShape(third_geo, kThirdGeoNumb);
 
-  first_geo.SetOuterEdges(first_fin_data.GetPriceQuote(),
-                          first_fin_data.Get26WkPriceReturn(),
-                          first_fin_data.Get3YrRevGrowthRate());
-
-  // Inner Shape.
-  cinder::gl::color(first_geo.GetInnerRedColor(),
-                    first_geo.GetInnerBlueColor(),
-                    first_geo.GetInnerGreenColor());
-  int numb_inner_segments = first_geo.GetInnerEdgeNumber();
-  cinder::vec2 center_inner_shape = getWindowCenter();
-  cinder::gl::drawSolidCircle(center_inner_shape, kInnerRadius, numb_inner_segments);
-
-  // Outer Shape.
-  cinder::gl::color(first_geo.GetOuterRedColor(),
-                    first_geo.GetOuterBlueColor(),
-                    first_geo.GetOuterGreenColor());
-  int numb_outer_segments = first_geo.GetOuterEdgeNumber();
-  cinder::vec2 center_outer_shape = getWindowCenter();
-  cinder::gl::drawSolidCircle(center_outer_shape, kOuterRadius, numb_outer_segments);
+  DrawOuterShape(first_geo, kFirstGeoNumb);
+  //DrawOuterShape(second_geo, kSecondGeoNumb);
+  //DrawOuterShape(third_geo, kThirdGeoNumb);
 }
 
 void StockGeo::ReceiveAPICallData(const std::string& user_input,
@@ -176,8 +155,46 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
 }
 
 void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
-                              int geometry_number) {
+                              geometry::Geometry& geo_data ) {
+  geo_data.SetInnerColors(fin_data.GetBuyRec(),
+                           fin_data.GetSellRec(),
+                           fin_data.GetHoldRec(),
+                           fin_data.GetStrongBuyRec(),
+                           fin_data.GetStrongSellRec());
+
+  geo_data.SetOuterColors(fin_data.GetPriceQuote(),
+                           fin_data.Get26WkPriceReturn(),
+                           fin_data.Get3YrRevGrowthRate());
+
+  geo_data.SetInnerEdges(fin_data.GetBuyRec(),
+                          fin_data.GetSellRec(),
+                          fin_data.GetStrongBuyRec(),
+                          fin_data.GetStrongSellRec());
+
+  geo_data.SetOuterEdges(fin_data.GetPriceQuote(),
+                          fin_data.Get26WkPriceReturn(),
+                          fin_data.Get3YrRevGrowthRate());
 
 };
+
+//TODO: Utilize the geo_numb
+
+void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
+  cinder::gl::color(geo_data.GetInnerRedColor(),
+                    geo_data.GetInnerBlueColor(),
+                    geo_data.GetInnerGreenColor());
+  int numb_inner_segments = geo_data.GetInnerEdgeNumber();
+  cinder::vec2 center_inner_shape = getWindowCenter();
+  cinder::gl::drawSolidCircle(center_inner_shape, kInnerRadius, numb_inner_segments);
+}
+
+void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
+  cinder::gl::color(geo_data.GetOuterRedColor(),
+                    geo_data.GetOuterBlueColor(),
+                    geo_data.GetOuterGreenColor());
+  int numb_outer_segments = geo_data.GetOuterEdgeNumber();
+  cinder::vec2 center_outer_shape = getWindowCenter();
+  cinder::gl::drawSolidCircle(center_outer_shape, kOuterRadius, numb_outer_segments);
+}
 
 }  // namespace myapp
