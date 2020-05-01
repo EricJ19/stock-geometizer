@@ -24,14 +24,20 @@ void StockGeo::setup() {
 }
 
 void StockGeo::update() {
-
+  // Updates finance data based on last API responses to each ImGui::InputText.
+  SetGeoData(first_fin_data, first_geo);
+  SetGeoData(second_fin_data, second_geo);
+  SetGeoData(third_fin_data, third_geo);
 }
 
 void StockGeo::draw() {
   // Clears the background to black.
   cinder::gl::clear();
 
+  // Create ImGui::Window for user inputs.
   CreateStockWindow();
+
+  // Draws geometrical shapes from stock input.
   DrawGeo();
 }
 
@@ -66,23 +72,16 @@ void StockGeo::CreateStockWindow() {
 }
 
 void StockGeo::DrawGeo() {
-  //TODO:Finish Creating Geometry for all 3 Data Sets.
-
-  cinder::gl::enableAlphaBlending();
-
-  SetGeoData(first_fin_data, first_geo);
-//  SetGeoData(second_fin_data, second_geo);
-//  SetGeoData(third_fin_data, third_geo);
-
+  //TODO: Finish Creating Geometry for all 3 Data Sets.
   //TODO: Make Color Transparent.
 
   DrawInnerShape(first_geo, kFirstGeoNumb);
-  //DrawInnerShape(second_geo, kSecondGeoNumb);
-  //DrawInnerShape(third_geo, kThirdGeoNumb);
+  DrawInnerShape(second_geo, kSecondGeoNumb);
+  DrawInnerShape(third_geo, kThirdGeoNumb);
 
   DrawOuterShape(first_geo, kFirstGeoNumb);
-  //DrawOuterShape(second_geo, kSecondGeoNumb);
-  //DrawOuterShape(third_geo, kThirdGeoNumb);
+  DrawOuterShape(second_geo, kSecondGeoNumb);
+  DrawOuterShape(third_geo, kThirdGeoNumb);
 }
 
 void StockGeo::ReceiveAPICallData(const std::string& user_input,
@@ -151,7 +150,7 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
                     const nlohmann::json& parse_price_quote,
                     const nlohmann::json& parse_price_metrics,
                     const nlohmann::json& parse_growth_metrics,
-                    const nlohmann::json & parse_recommendations) {
+                    const nlohmann::json& parse_recommendations) {
   fin_data.SetPriceQuote(parse_price_quote.value("o", 0));
 
   for (auto& elem : parse_price_metrics.items()) {
@@ -170,9 +169,10 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
     }
   }
 
-  //const std::string kDailyRecKey = "0";
+  // This key represents expert recommendations for the day API was called.
+  const std::string kDailyRecKey = "0";
   for (auto& elem : parse_recommendations.items()) {
-    if (elem.key() == "0") {
+    if (elem.key() == kDailyRecKey) {
       nlohmann::json recommendations = elem.value();
       fin_data.SetBuyRec(recommendations.value("buy", 0));
       fin_data.SetSellRec(recommendations.value("sell", 0));

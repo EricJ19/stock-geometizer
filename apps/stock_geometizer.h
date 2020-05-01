@@ -13,7 +13,8 @@
 
 namespace myapp {
 
-// This segments the screen into different parts to put the different shape center in.
+// This segments the screen into different parts to put the
+// different shape center in.
 const int kWindowSegmentNumb = 5;
 
 // Used to ensure each geometrical shape is vertically centered.
@@ -63,7 +64,8 @@ const std::string kRecommendationsEndURL = "&token=" + kAPIKey;
 
 class StockGeo : public cinder::app::App {
  private:
-  //TODO:: Try to change these to vectors or some other wrapper.
+  //TODO: Try to change these to vectors or some other wrapper.
+
   // These are for ImGui Window
   char first_input_chars[5];
   char second_input_chars[5];
@@ -88,11 +90,11 @@ class StockGeo : public cinder::app::App {
   void update() override;
   void draw() override;
   void keyDown(cinder::app::KeyEvent) override;
-  //void SetUserInputToString(std::string input_str, std::vector<char> input_chars);
   void CreateStockWindow();
   void DrawGeo();
 
-  // Calls and Receives API data, storing them in FinanceData and Geometry objects.
+  // Calls and Receives API data, storing them in FinanceData
+  // and Geometry objects.
   // user_input is the input to the ImGui::InputText
   // geo_numb represents which geometry from which call being analyzed
   // from 1 to 3.
