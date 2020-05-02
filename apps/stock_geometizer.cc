@@ -26,8 +26,8 @@ void StockGeo::setup() {
 void StockGeo::update() {
   // Updates finance data based on last API responses to each ImGui::InputText.
   SetGeoData(first_fin_data, first_geo);
-  //SetGeoData(second_fin_data, second_geo);
-  //SetGeoData(third_fin_data, third_geo);
+  SetGeoData(second_fin_data, second_geo);
+  SetGeoData(third_fin_data, third_geo);
 }
 
 void StockGeo::draw() {
@@ -49,21 +49,22 @@ void StockGeo::CreateStockWindow() {
   ImGui::Text("Input a Stock");
 
   // Allows user to input up to three different stocks.
+
   ImGui::InputText("Stock1", first_input_chars, IM_ARRAYSIZE(first_input_chars));
-  if (ImGui::Button("Ok")) {
+  if (ImGui::Button("Ok1")) {
     // Set user input into string to be used for API calls
     first_input_str = first_input_chars;
     ReceiveAPICallData(first_input_str, kFirstGeoNumb);
   }
 
   ImGui::InputText("Stock2", second_input_chars, IM_ARRAYSIZE(second_input_chars));
-  if (ImGui::Button("Ok")) {
+  if (ImGui::Button("Ok2")) {
     second_input_str = second_input_chars;
     ReceiveAPICallData(second_input_str, kSecondGeoNumb);
   }
 
   ImGui::InputText("Stock3", third_input_chars, IM_ARRAYSIZE(third_input_chars));
-  if (ImGui::Button("Ok")) {
+  if (ImGui::Button("Ok3")) {
     third_input_str = third_input_chars;
     ReceiveAPICallData(third_input_str, kThirdGeoNumb);
   }
@@ -73,18 +74,17 @@ void StockGeo::CreateStockWindow() {
 
 void StockGeo::DrawGeo() {
   //TODO: Finish Creating Geometry for all 3 Data Sets.
-  //TODO: Make Color Transparent.
 
   // Note: Outer shape is drawn first so that the inner
   // shape drawn on top outer shape or else cover by the outer shape.
 
   DrawOuterShape(first_geo, kFirstGeoNumb);
-  //DrawOuterShape(second_geo, kSecondGeoNumb);
-  //DrawOuterShape(third_geo, kThirdGeoNumb);
+  DrawOuterShape(second_geo, kSecondGeoNumb);
+  DrawOuterShape(third_geo, kThirdGeoNumb);
 
   DrawInnerShape(first_geo, kFirstGeoNumb);
-  //DrawInnerShape(second_geo, kSecondGeoNumb);
-  //DrawInnerShape(third_geo, kThirdGeoNumb);
+  DrawInnerShape(second_geo, kSecondGeoNumb);
+  DrawInnerShape(third_geo, kThirdGeoNumb);
 }
 
 void StockGeo::ReceiveAPICallData(const std::string& user_input,
@@ -227,7 +227,7 @@ void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
 
   cinder::vec2 center_inner_shape;
   // Ensure geo_numb is appropriate to properly display geometry.
-  if (geo_numb <= 0 && geo_numb <= kMaxNumbOfGeos) {
+  if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
     return;
   } else {
     center_inner_shape = {kWindowSegmentWidth * geo_numb, kMidWindowHeight};
@@ -249,7 +249,7 @@ void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
 
   cinder::vec2 center_outer_shape;
   // Ensure geo_numb is appropriate to properly display geometry.
-  if (geo_numb <= 0 && geo_numb <= kMaxNumbOfGeos) {
+  if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
     return;
   } else {
     center_outer_shape = {kWindowSegmentWidth * geo_numb, kMidWindowHeight};

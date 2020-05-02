@@ -20,11 +20,11 @@ const int kWindowSegmentNumb = 5;
 // Used to ensure each geometrical shape is vertically centered.
 const double kHalf = 2.0;
 
-// Mac number of geometrical shapes that can be displaced.
+// Max number of geometrical shapes that can be displaced.
 const int kMaxNumbOfGeos = 3;
 
 // These are for changing the sizes of the geometrical shapes.
-const int kInnerRadius = 150;
+const int kInnerRadius = 120;
 const int kOuterRadius = 220;
 
 // These distinguish which geometrical shape or finance data set
@@ -66,7 +66,7 @@ class StockGeo : public cinder::app::App {
  private:
   //TODO: Try to change these to vectors or some other wrapper.
 
-  // These are for ImGui Window
+  // These are for ImGui::InputText.
   char first_input_chars[5];
   char second_input_chars[5];
   char third_input_chars[5];
