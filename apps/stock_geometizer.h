@@ -133,7 +133,6 @@ class StockGeo : public cinder::app::App {
   // geometry_data represents which geometry data set being analyzed.
   // geo_numb represents which geometry shape is being analyzed (from 1 to 3).
   void DrawOuterShape(geometry::Geometry& geo_data, int geo_numb);
-
 };
 
 //int callback(ImGuiTextEditCallbackData* data);

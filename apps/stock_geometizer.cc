@@ -73,8 +73,6 @@ void StockGeo::CreateStockWindow() {
 }
 
 void StockGeo::DrawGeo() {
-  //TODO: Finish Creating Geometry for all 3 Data Sets.
-
   // Note: Outer shape is drawn first so that the inner
   // shape drawn on top outer shape or else cover by the outer shape.
 
@@ -147,7 +145,8 @@ finance::FinanceData& StockGeo::FindFinSetToAnalyze(const int &geo_numb) {
   } else if (geo_numb == kThirdGeoNumb) {
     return third_fin_data;
   } else {
-    throw std::string("Invalid Geometry Number");
+    // geo_numb must be between 1 to kMaxNumbOfGeos.
+    throw std::exception();
   }
 }
 
@@ -156,8 +155,12 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
                     const nlohmann::json& parse_price_metrics,
                     const nlohmann::json& parse_growth_metrics,
                     const nlohmann::json& parse_recommendations) {
-  fin_data.SetPriceQuote(parse_price_quote.value("o", 0));
+  // Parse price quote response. This is a 1-D JSON array and so only
+  // the key is needed (without parsing into arrays) to get value.
+  const std::string kOpeningPriceKey = "o";
+  fin_data.SetPriceQuote(parse_price_quote.value(kOpeningPriceKey, 0));
 
+  // Parse 26 Week Price Return Daily. Parses into 2-D array.
   for (auto& elem : parse_price_metrics.items()) {
     if (elem.key() == "metric") {
       nlohmann::json price_metrics = elem.value();
@@ -166,6 +169,7 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
     }
   }
 
+  // Parse 3 Year Growth. Parses into 2-D array.
   for (auto& elem : parse_growth_metrics.items()) {
     if (elem.key() == "metric") {
       nlohmann::json growth_metrics = elem.value();
@@ -174,7 +178,9 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
     }
   }
 
-  // This key represents expert recommendations for the day API was called.
+  // Parses 2-D array for number of recommendations for selling, holding,
+  // and buying the stock.
+  // This key represents recommendations for the same day API was called.
   const std::string kDailyRecKey = "0";
   for (auto& elem : parse_recommendations.items()) {
     if (elem.key() == kDailyRecKey) {
