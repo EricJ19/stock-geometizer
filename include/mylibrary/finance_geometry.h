@@ -31,8 +31,8 @@ class Geometry {
   // Outer edge number is larger than inner as
   // outer shape is related to percentage, which has larger range
   // than recommendation number used for inner edge number.
-  const double kMaxOuterEdgeNumb = 7;
-  const double kMaxInnerEdgeNumb = 7;
+  const double kMaxOuterEdgeNumb = 8;
+  const double kMaxInnerEdgeNumb = 8;
   // Minimum polygon shape is a triangle.
   const double kMinEdgeNumb = 3;
 
@@ -57,11 +57,19 @@ class Geometry {
   int inner_edge_number;
 
  public:
-  // Note: outer and inner calculates represent the desirability of stocks.
-  // The more red, the more undesirable (eg. buy_rec is low),
+  //===========================================================================
+  // Note: outer and inner calculations represent the desirability of stocks.
+  //
+  // The more edges for both inner and outer calculations, the more desirable,
+  // with more growth, return, buy recommendations etc.
+  //
+  // For both inner and outer calculations:
+  // The more red, the more undesirable
+  // (eg. buy_rec is low, 3 Year Growth is negative).
   // The more green, the more desirable.
   // Yellow represents a mix of desirability and undesirability.
   // Blue color is not necessary although it is an option than can be modified.
+  //===========================================================================
 
   void SetOuterColors(double price_quote,
                       double _26_wk_price_return,

@@ -18,7 +18,7 @@ void geometry::Geometry::SetOuterColors(double price_quote,
   // Blue color is not needed but can be changed.
   double unscaled_blue = 0.0;
 
-  // Create red, blue, or yellow shade depending on index
+  // Create red, green, or yellow shade depending on index.
   if (weighted_index < 0) {
     unscaled_red = weighted_index;
 
@@ -26,6 +26,7 @@ void geometry::Geometry::SetOuterColors(double price_quote,
     unscaled_green = weighted_index;
 
   } else if (weighted_index == 0) {
+    // Yellow color is created here.
     unscaled_red = weighted_index;
     unscaled_green = weighted_index;
   }
@@ -47,9 +48,9 @@ void geometry::Geometry::SetOuterColors(double price_quote,
   double scaled_red = (unscaled_red - kMinGrowthRate)
                     / (kMaxRecNumb - kMinGrowthRate);
   double scaled_green = (unscaled_green - kMinGrowthRate)
-                        / (kMaxRecNumb - kMinGrowthRate);
+                      / (kMaxRecNumb - kMinGrowthRate);
   double scaled_blue = (unscaled_blue - kMinGrowthRate)
-                       / (kMaxRecNumb - kMinGrowthRate);
+                     / (kMaxRecNumb - kMinGrowthRate);
 
   outer_red_value = scaled_red;
   outer_green_value = scaled_green;
@@ -64,11 +65,11 @@ void geometry::Geometry::SetOuterEdges(double price_quote,
   double _26_wk_price_growth_rate
     = (_26_wk_price_return / price_quote) * deci_to_percent;
 
-  // Price return and growth weight can be positive or negative.
+  // Note: Price return and growth weight can be positive or negative.
   double unscaled_edge_number = kPriceReturnWeight * _26_wk_price_growth_rate
                               + kStrongRecWeight * _3_yr_rev_growth_rate;
 
-  // Scale edge_number between 0 and 30 (max edges).
+  // Scale edge_number between 0 and 8 (max edges).
   double scaled_edge_number
       = (unscaled_edge_number / kMaxRecNumb) * kMaxOuterEdgeNumb;
 
