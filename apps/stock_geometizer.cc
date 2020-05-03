@@ -21,6 +21,11 @@ StockGeo::StockGeo() {
 
 void StockGeo::setup() {
   ImGui::initialize();
+
+  // All geometry are vertically centered.
+  mid_window_height = getWindowHeight() / kHalf;
+  // Window center is the default value if geo_numb does not match.
+  third_of_window_width = 0.25 * getWindowWidth();
 }
 
 void StockGeo::update() {
@@ -57,7 +62,7 @@ void StockGeo::CreateStockWindow() {
     ReceiveAPICallData(first_input_str, kFirstGeoNumb);
   }
 
-  ImGui::InputText("Stock2", second_input_chars, IM_ARRAYSIZE(second_input_chars));
+  ImGui::InputText("Stock2", second_input_chars,IM_ARRAYSIZE(second_input_chars));
   if (ImGui::Button("Ok2")) {
     second_input_str = second_input_chars;
     ReceiveAPICallData(second_input_str, kSecondGeoNumb);
@@ -158,13 +163,17 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
   // Parse price quote response. This is a 1-D JSON array and so only
   // the key is needed (without parsing into arrays) to get value.
   const std::string kOpeningPriceKey = "o";
-  fin_data.SetPriceQuote(parse_price_quote.value(kOpeningPriceKey, 0));
+  fin_data.SetPriceQuote(
+      parse_price_quote.value(
+          kOpeningPriceKey, 0));
 
   // Parse 26 Week Price Return Daily. Parses into 2-D array.
   for (auto& elem : parse_price_metrics.items()) {
     if (elem.key() == "metric") {
       nlohmann::json price_metrics = elem.value();
-      fin_data.Set26WkPriceReturn( price_metrics.value("26WeekPriceReturnDaily",0));
+      fin_data.Set26WkPriceReturn(
+          price_metrics.value(
+              "26WeekPriceReturnDaily",0));
       break;
     }
   }
@@ -173,7 +182,9 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
   for (auto& elem : parse_growth_metrics.items()) {
     if (elem.key() == "metric") {
       nlohmann::json growth_metrics = elem.value();
-      fin_data.Set3YrRevGrowthRate(growth_metrics.value("epsGrowth3Y",0));
+      fin_data.Set3YrRevGrowthRate(
+          growth_metrics.value(
+              "epsGrowth3Y",0));
       break;
     }
   }
@@ -185,11 +196,25 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
   for (auto& elem : parse_recommendations.items()) {
     if (elem.key() == kDailyRecKey) {
       nlohmann::json recommendations = elem.value();
-      fin_data.SetBuyRec(recommendations.value("buy", 0));
-      fin_data.SetSellRec(recommendations.value("sell", 0));
-      fin_data.SetHoldRec(recommendations.value("hold", 0));
-      fin_data.SetStrongBuyRec(recommendations.value("strongBuy", 0));
-      fin_data.SetStrongSellRec(recommendations.value("strongSell", 0));
+      fin_data.SetBuyRec(
+          recommendations.value(
+              "buy",0));
+
+      fin_data.SetSellRec(
+          recommendations.value(
+              "sell", 0));
+
+      fin_data.SetHoldRec(
+          recommendations.value(
+              "hold", 0));
+
+      fin_data.SetStrongBuyRec(
+          recommendations.value(
+              "strongBuy", 0));
+
+      fin_data.SetStrongSellRec(
+          recommendations.value(
+              "strongSell",0));
       break;
     }
   }
@@ -217,8 +242,6 @@ void StockGeo::SetGeoData(finance::FinanceData& fin_data,
                           fin_data.Get3YrRevGrowthRate());
 };
 
-//TODO: Enforce DRY.
-
 void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
   cinder::gl::color(geo_data.GetInnerRedColor(),
                     geo_data.GetInnerGreenColor(),
@@ -226,20 +249,17 @@ void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
 
   int numb_inner_segments = geo_data.GetInnerEdgeNumber();
 
-  // All Geometry are vertically centered.
-  const double kMidWindowHeight = getWindowHeight() / kHalf;
-  // Window center is the default value if geo_numb does not match.
-  const double kThirdOfWindowWidth = 0.25 * getWindowWidth();
-
   cinder::vec2 center_inner_shape;
   // Ensure geo_numb is appropriate to properly display geometry.
   if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
     return;
   } else {
-    center_inner_shape = {kThirdOfWindowWidth * geo_numb, kMidWindowHeight};
+    center_inner_shape = {third_of_window_width * geo_numb, mid_window_height};
   }
 
-  cinder::gl::drawSolidCircle(center_inner_shape, kInnerRadius, numb_inner_segments);
+  cinder::gl::drawSolidCircle(center_inner_shape,
+                              kInnerRadius,
+                              numb_inner_segments);
 }
 
 void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
@@ -248,20 +268,17 @@ void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
                     geo_data.GetOuterBlueColor());
   int numb_outer_segments = geo_data.GetOuterEdgeNumber();
 
-  // All Geometry are vertically centered.
-  const double kMidWindowHeight = getWindowHeight() / kHalf;
-  // Window center is the default value if geo_numb does not match.
-  const double kThirdOfWindowWidth = 0.25 * getWindowWidth();
-
   cinder::vec2 center_outer_shape;
   // Ensure geo_numb is appropriate to properly display geometry.
   if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
     return;
   } else {
-    center_outer_shape = {kThirdOfWindowWidth * geo_numb, kMidWindowHeight};
+    center_outer_shape = {third_of_window_width * geo_numb, mid_window_height};
   }
 
-  cinder::gl::drawSolidCircle(center_outer_shape, kOuterRadius, numb_outer_segments);
+  cinder::gl::drawSolidCircle(center_outer_shape,
+                              kOuterRadius,
+                              numb_outer_segments);
 }
 
 }  // namespace myapp

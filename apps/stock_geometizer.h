@@ -64,6 +64,11 @@ const std::string kRecommendationsEndURL = "&token=" + kAPIKey;
 
 class StockGeo : public cinder::app::App {
  private:
+  // Represents the y-position of the vertical middle of the app window.
+  double mid_window_height;
+  // Represents the x-position of a third of the app window width.
+  double third_of_window_width;
+
   //TODO: Try to change these to vectors or some other wrapper.
 
   // These are for ImGui::InputText.
