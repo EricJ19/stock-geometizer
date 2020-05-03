@@ -13,10 +13,6 @@
 
 namespace myapp {
 
-// This segments the screen into different parts to put the
-// different shape center in.
-const int kWindowSegmentNumb = 10;
-
 // Used to ensure each geometrical shape is vertically centered.
 const double kHalf = 2.0;
 
@@ -65,9 +61,9 @@ const std::string kRecommendationsEndURL = "&token=" + kAPIKey;
 class StockGeo : public cinder::app::App {
  private:
   // Represents the y-position of the vertical middle of the app window.
-  double mid_window_height;
+  double mid_window_height{};
   // Represents the x-position of a third of the app window width.
-  double third_of_window_width;
+  double third_of_window_width{};
 
   //TODO: Try to change these to vectors or some other wrapper.
 

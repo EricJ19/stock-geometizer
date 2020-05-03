@@ -26,7 +26,7 @@ class FinanceData {
   int strong_sell_rec;
 
  public:
-  // Getters
+  // Getters.
   double GetPriceQuote() const;
   double Get26WkPriceReturn() const;
   double Get3YrRevGrowthRate() const;
@@ -36,7 +36,7 @@ class FinanceData {
   int GetStrongBuyRec() const;
   int GetStrongSellRec() const;
 
-  // Setters
+  // Setters.
   void SetPriceQuote(double price_quote_to_set);
   void Set26WkPriceReturn(double _26_wk_price_return_to_set);
   void Set3YrRevGrowthRate(double _3_yr_rev_growth_rate_to_set);

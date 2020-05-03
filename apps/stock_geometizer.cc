@@ -24,8 +24,12 @@ void StockGeo::setup() {
 
   // All geometry are vertically centered.
   mid_window_height = getWindowHeight() / kHalf;
+
+  // This represents the scaling factor to get one third of the window
+  // either vertically or horizontally.
+  const double kOneThirdScale = 0.25;
   // Window center is the default value if geo_numb does not match.
-  third_of_window_width = 0.25 * getWindowWidth();
+  third_of_window_width = kOneThirdScale * getWindowWidth();
 }
 
 void StockGeo::update() {
