@@ -55,20 +55,31 @@ void StockGeo::CreateStockWindow() {
 
   // Allows user to input up to three different stocks.
 
-  ImGui::InputText("Stock1", first_input_chars, IM_ARRAYSIZE(first_input_chars));
+  ImGui::InputText(
+      "Stock1",
+      first_input_chars,
+      IM_ARRAYSIZE(first_input_chars));
+
   if (ImGui::Button("Ok1")) {
     // Set user input into string to be used for API calls
     first_input_str = first_input_chars;
     ReceiveAPICallData(first_input_str, kFirstGeoNumb);
   }
 
-  ImGui::InputText("Stock2", second_input_chars,IM_ARRAYSIZE(second_input_chars));
+  ImGui::InputText(
+      "Stock2",
+      second_input_chars,
+      IM_ARRAYSIZE(second_input_chars));
+
   if (ImGui::Button("Ok2")) {
     second_input_str = second_input_chars;
     ReceiveAPICallData(second_input_str, kSecondGeoNumb);
   }
 
-  ImGui::InputText("Stock3", third_input_chars, IM_ARRAYSIZE(third_input_chars));
+  ImGui::InputText(
+      "Stock3", third_input_chars,
+      IM_ARRAYSIZE(third_input_chars));
+
   if (ImGui::Button("Ok3")) {
     third_input_str = third_input_chars;
     ReceiveAPICallData(third_input_str, kThirdGeoNumb);
@@ -243,18 +254,21 @@ void StockGeo::SetGeoData(finance::FinanceData& fin_data,
 };
 
 void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
+  // Draw inner color.
   cinder::gl::color(geo_data.GetInnerRedColor(),
                     geo_data.GetInnerGreenColor(),
                     geo_data.GetInnerBlueColor());
 
   int numb_inner_segments = geo_data.GetInnerEdgeNumber();
 
+  // Draw inner geometry.
   cinder::vec2 center_inner_shape;
   // Ensure geo_numb is appropriate to properly display geometry.
   if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
     return;
   } else {
-    center_inner_shape = {third_of_window_width * geo_numb, mid_window_height};
+    center_inner_shape
+      = {third_of_window_width * geo_numb, mid_window_height};
   }
 
   cinder::gl::drawSolidCircle(center_inner_shape,
@@ -263,17 +277,20 @@ void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
 }
 
 void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
+  // Draw outer color.
   cinder::gl::color(geo_data.GetOuterRedColor(),
                     geo_data.GetOuterGreenColor(),
                     geo_data.GetOuterBlueColor());
   int numb_outer_segments = geo_data.GetOuterEdgeNumber();
 
+  // Draw outer geometry.
   cinder::vec2 center_outer_shape;
   // Ensure geo_numb is appropriate to properly display geometry.
   if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
     return;
   } else {
-    center_outer_shape = {third_of_window_width * geo_numb, mid_window_height};
+    center_outer_shape
+      = {third_of_window_width * geo_numb, mid_window_height};
   }
 
   cinder::gl::drawSolidCircle(center_outer_shape,
