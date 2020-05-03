@@ -109,52 +109,45 @@ void StockGeo::ReceiveAPICallData(const std::string& user_input,
                                   int geo_numb) {
   // API calls for financial data.
   // Specific stock being called is custom, based on user inputs.
-  cpr::Response price_quote_response;
-  cpr::Response price_metrics_response;
-  cpr::Response growth_metrics_response;
-  cpr::Response recommendations_response;
+  cpr::Response price_quote_response = cpr::Get(cpr::Url{
+    kPriceQuoteBeginURL + user_input + kPriceQuoteEndURL});
+
+  cpr::Response price_metrics_response = cpr::Get(cpr::Url{
+    kMetricsBeginURL + user_input + kPriceMetricEndURL});
+
+  cpr::Response growth_metrics_response = cpr::Get(cpr::Url{
+    kMetricsBeginURL + user_input + kGrowthMetricEndURL});
+
+  cpr::Response recommendations_response = cpr::Get(cpr::Url{
+    kRecommendationBeginURL + user_input + kRecommendationsEndURL});
 
   try {
-    price_quote_response = cpr::Get(cpr::Url{
-        kPriceQuoteBeginURL + user_input + kPriceQuoteEndURL});
+    // Store API response in JSON format.
+    nlohmann::json parse_price_quote =
+        nlohmann::json::parse(price_quote_response.text);
 
-    price_metrics_response = cpr::Get(cpr::Url{
-        kMetricsBeginURL + user_input + kPriceMetricEndURL});
+    nlohmann::json parse_price_metrics =
+        nlohmann::json::parse(price_metrics_response.text);
 
-    growth_metrics_response = cpr::Get(cpr::Url{
-        kMetricsBeginURL + user_input + kGrowthMetricEndURL});
+    nlohmann::json parse_growth_metrics =
+        nlohmann::json::parse(growth_metrics_response.text);
 
-    recommendations_response = cpr::Get(cpr::Url{
-        kRecommendationBeginURL + user_input + kRecommendationsEndURL});
+    nlohmann::json parse_recommendations =
+        nlohmann::json::parse(recommendations_response.text);
+
+    // Determine which finance data set to modify based on which
+    // ImGui::Button was clicked.
+    finance::FinanceData& finance_set_to_modify = FindFinSetToAnalyze(geo_numb);
+
+    // Modify finance data set based on API responses and
+    // which ImGui::InputText user changed.
+    SetFinanceData(finance_set_to_modify, parse_price_quote,
+                   parse_price_metrics, parse_growth_metrics,
+                   parse_recommendations);
   } catch (std::exception& e) {
-    //TODO:Handle more gracefully.
+    // Simply don't respond if parsing fails.
     return;
   }
-
-  // Store API response in JSON format.
-  nlohmann::json parse_price_quote
-    = nlohmann::json::parse(price_quote_response.text);
-
-  nlohmann::json parse_price_metrics
-    = nlohmann::json::parse(price_metrics_response.text);
-
-  nlohmann::json parse_growth_metrics
-    = nlohmann::json::parse(growth_metrics_response.text);
-
-  nlohmann::json parse_recommendations
-    = nlohmann::json::parse(recommendations_response.text);
-
-  // Determine which finance data set to modify based on which
-  // ImGui::Button was clicked.
-  finance::FinanceData& finance_set_to_modify = FindFinSetToAnalyze(geo_numb);
-
-  // Modify finance data set based on API responses and
-  // which ImGui::InputText user changed.
-  SetFinanceData(finance_set_to_modify,
-                 parse_price_quote,
-                 parse_price_metrics,
-                 parse_growth_metrics,
-                 parse_recommendations);
 }
 
 finance::FinanceData& StockGeo::FindFinSetToAnalyze(const int &geo_numb) {
