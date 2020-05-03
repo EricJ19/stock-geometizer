@@ -15,7 +15,7 @@ namespace myapp {
 
 // This segments the screen into different parts to put the
 // different shape center in.
-const int kWindowSegmentNumb = 5;
+const int kWindowSegmentNumb = 10;
 
 // Used to ensure each geometrical shape is vertically centered.
 const double kHalf = 2.0;
@@ -24,8 +24,8 @@ const double kHalf = 2.0;
 const int kMaxNumbOfGeos = 3;
 
 // These are for changing the sizes of the geometrical shapes.
-const int kInnerRadius = 120;
-const int kOuterRadius = 220;
+const int kInnerRadius = 100;
+const int kOuterRadius = 170;
 
 // These distinguish which geometrical shape or finance data set
 // the code is dealing with.
@@ -67,9 +67,9 @@ class StockGeo : public cinder::app::App {
   //TODO: Try to change these to vectors or some other wrapper.
 
   // These are for ImGui::InputText.
-  char first_input_chars[5];
-  char second_input_chars[5];
-  char third_input_chars[5];
+  char first_input_chars[7];
+  char second_input_chars[7];
+  char third_input_chars[7];
   std::string first_input_str;
   std::string second_input_str;
   std::string third_input_str;

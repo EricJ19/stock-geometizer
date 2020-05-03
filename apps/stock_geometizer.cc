@@ -217,7 +217,7 @@ void StockGeo::SetGeoData(finance::FinanceData& fin_data,
                           fin_data.Get3YrRevGrowthRate());
 };
 
-//TODO: Utilize the geo_numb, enforce DRY.
+//TODO: Enforce DRY.
 
 void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
   cinder::gl::color(geo_data.GetInnerRedColor(),
@@ -229,14 +229,14 @@ void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
   // All Geometry are vertically centered.
   const double kMidWindowHeight = getWindowHeight() / kHalf;
   // Window center is the default value if geo_numb does not match.
-  const double kWindowSegmentWidth = getWindowWidth() / kWindowSegmentNumb;
+  const double kThirdOfWindowWidth = 0.25 * getWindowWidth();
 
   cinder::vec2 center_inner_shape;
   // Ensure geo_numb is appropriate to properly display geometry.
   if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
     return;
   } else {
-    center_inner_shape = {kWindowSegmentWidth * geo_numb, kMidWindowHeight};
+    center_inner_shape = {kThirdOfWindowWidth * geo_numb, kMidWindowHeight};
   }
 
   cinder::gl::drawSolidCircle(center_inner_shape, kInnerRadius, numb_inner_segments);
@@ -251,14 +251,14 @@ void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
   // All Geometry are vertically centered.
   const double kMidWindowHeight = getWindowHeight() / kHalf;
   // Window center is the default value if geo_numb does not match.
-  const double kWindowSegmentWidth = getWindowWidth() / kWindowSegmentNumb;
+  const double kThirdOfWindowWidth = 0.25 * getWindowWidth();
 
   cinder::vec2 center_outer_shape;
   // Ensure geo_numb is appropriate to properly display geometry.
   if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
     return;
   } else {
-    center_outer_shape = {kWindowSegmentWidth * geo_numb, kMidWindowHeight};
+    center_outer_shape = {kThirdOfWindowWidth * geo_numb, kMidWindowHeight};
   }
 
   cinder::gl::drawSolidCircle(center_outer_shape, kOuterRadius, numb_outer_segments);
