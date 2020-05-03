@@ -13,21 +13,25 @@ void geometry::Geometry::SetOuterColors(double price_quote,
   double weighted_index = kPriceReturnWeight * _26_wk_price_growth_rate
                         + kRevGrowthWeight * _3_yr_rev_growth_rate;
 
-  double unscaled_red = 0.0;
-  double unscaled_green = 0.0;
+  // Default values.
+  double unscaled_red = kMinGrowthRate;
+  double unscaled_green = kMinGrowthRate;
   // Blue color is not needed but can be changed.
-  double unscaled_blue = 0.0;
+  double unscaled_blue = kMinGrowthRate;
 
+  // This is to create a range of possible values near weighted_index = 0 for
+  // the color to be a yellow gradient.
+  double const kYellowBounds = 8.0;
   // Create red, green, or yellow shade depending on index.
-  if (weighted_index < 0) {
+  if (-kYellowBounds < weighted_index && weighted_index < kYellowBounds) {
+    // Yellow gradient is created here.
+    unscaled_red = weighted_index;
+    unscaled_green = weighted_index;
+
+  } if (weighted_index < 0) {
     unscaled_red = weighted_index;
 
   } else if (weighted_index > 0) {
-    unscaled_green = weighted_index;
-
-  } else if (weighted_index == 0) {
-    // Yellow color is created here.
-    unscaled_red = weighted_index;
     unscaled_green = weighted_index;
   }
 

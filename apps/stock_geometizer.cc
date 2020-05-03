@@ -221,8 +221,8 @@ void StockGeo::SetGeoData(finance::FinanceData& fin_data,
 
 void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
   cinder::gl::color(geo_data.GetInnerRedColor(),
-                    geo_data.GetInnerBlueColor(),
-                    geo_data.GetInnerGreenColor());
+                    geo_data.GetInnerGreenColor(),
+                    geo_data.GetInnerBlueColor());
 
   int numb_inner_segments = geo_data.GetInnerEdgeNumber();
 
@@ -244,8 +244,8 @@ void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
 
 void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
   cinder::gl::color(geo_data.GetOuterRedColor(),
-                    geo_data.GetOuterBlueColor(),
-                    geo_data.GetOuterGreenColor());
+                    geo_data.GetOuterGreenColor(),
+                    geo_data.GetOuterBlueColor());
   int numb_outer_segments = geo_data.GetOuterEdgeNumber();
 
   // All Geometry are vertically centered.

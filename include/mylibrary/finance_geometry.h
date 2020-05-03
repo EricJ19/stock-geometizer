@@ -13,26 +13,33 @@ class Geometry {
   // measures more than others.
 
   // Weight based on percentage.
-  const double kPriceReturnWeight = 0.7;
-  const double kRevGrowthWeight = 0.3;
+  // Price return weight is favored as it represents shorter term changes which
+  // may be more relevant for short-term investors.
+  const double kPriceReturnWeight = 0.9;
+  const double kRevGrowthWeight = 0.7;
   // Weight based on real value.
   const double kStrongRecWeight = 2.0;
 
-  // Below are Max/min const values for scaling purposes.
+  // Below are Max/min const values for scaling the edge number
+  // and color gradient.
+  // Otherwise, edge number and color gradient could vary widely, making it's
+  // geometry potentially hard to understand (ex. edge number of 3000).
   // "double" type is used for division with other double values.
 
-  // Max Rec is arbitrarily large.
+  // This is a reasonable, arbitrarily large number based on observed.
+  // sample of API responses
   const double kMaxRecNumb = 30;
-  // Max and Min Growth Rate are for _26_wk_price_return and
-  // _3_yr_rev_growth_rate. These are arbitrarily and small percentages.
-  const double kMinGrowthRate = -120;
-  const double kMaxGrowthRate = 120;
+  // Max/Min growth rate is for _3_yr_rev_growth_rate and _26_wk_price_return.
+  // These are arbitrarily and small/large percentages
+  // that would show clear differences in color for typical stocks.
+  const double kMinGrowthRate = -70;
+  const double kMaxGrowthRate = 70;
 
   // Outer edge number is larger than inner as
   // outer shape is related to percentage, which has larger range
   // than recommendation number used for inner edge number.
-  const double kMaxOuterEdgeNumb = 8;
-  const double kMaxInnerEdgeNumb = 8;
+  const double kMaxOuterEdgeNumb = 7;
+  const double kMaxInnerEdgeNumb = 7;
   // Minimum polygon shape is a triangle.
   const double kMinEdgeNumb = 3;
 
