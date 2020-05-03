@@ -72,8 +72,10 @@
      
  - **5/2/20** Fix UI errors, fine tune UI, and continue improving object decomposition.
     - Now supports three geometrical shapes without previous error where only one shape responded to user inputs.
-
-   
+    - My goal was to create geometry that would be easily differentiable between unique stocks. 
+        - To do this, the coloring and edge number is more unique to each stock. 
+        - The range of yellow colors increased so it's not just red or green, there is a probably chance it is yellow.
+        - The Max/Min constants were larger so more unique stock shapes can be created based on stock attributes.
 
 
    
