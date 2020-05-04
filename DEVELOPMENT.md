@@ -85,7 +85,10 @@
     - Modified various constants for Geometry class to make stocks more differentiable. This was important
     from a functionality perspective as easier differentiation makes it easier to compare different stocks.
     
-
+- **5/4/20** Improve object decomposition
+    - Better utilize the FinanceData class by changing the function parameters in Geometry class to
+    simply accept a FinanceData object rather than ex. 26 Week Price Return from the return value of a function 
+    in FinanceData.
 
    
    

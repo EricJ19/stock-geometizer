@@ -231,24 +231,11 @@ void StockGeo::SetFinanceData(finance::FinanceData& fin_data,
 
 void StockGeo::SetGeoData(finance::FinanceData& fin_data,
                               geometry::Geometry& geo_data ) {
-  geo_data.SetInnerColors(fin_data.GetBuyRec(),
-                           fin_data.GetSellRec(),
-                           fin_data.GetHoldRec(),
-                           fin_data.GetStrongBuyRec(),
-                           fin_data.GetStrongSellRec());
+  geo_data.SetInnerColors(fin_data);
+  geo_data.SetOuterColors(fin_data);
 
-  geo_data.SetOuterColors(fin_data.GetPriceQuote(),
-                           fin_data.Get26WkPriceReturn(),
-                           fin_data.Get3YrRevGrowthRate());
-
-  geo_data.SetInnerEdges(fin_data.GetBuyRec(),
-                          fin_data.GetSellRec(),
-                          fin_data.GetStrongBuyRec(),
-                          fin_data.GetStrongSellRec());
-
-  geo_data.SetOuterEdges(fin_data.GetPriceQuote(),
-                          fin_data.Get26WkPriceReturn(),
-                          fin_data.Get3YrRevGrowthRate());
+  geo_data.SetInnerEdges(fin_data);
+  geo_data.SetOuterEdges(fin_data);
 };
 
 void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {

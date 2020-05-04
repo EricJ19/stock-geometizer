@@ -1,17 +1,18 @@
 //
 // Created by Eric Jin on 4/24/20.
 //
+#include <mylibrary/finance_data.h>
 #include <mylibrary/finance_geometry.h>
 
-void geometry::Geometry::SetOuterColors(double price_quote,
-                                        double _26_wk_price_return,
-                                        double _3_yr_rev_growth_rate) {
+void geometry::Geometry::SetOuterColors(finance::FinanceData fin_data) {
   // Turn price return as a growth rate.
   int deci_to_percent = 100;
   double _26_wk_price_growth_rate
-      = (_26_wk_price_return / price_quote) * deci_to_percent;
+    = (fin_data.Get26WkPriceReturn() / fin_data.GetPriceQuote())
+        * deci_to_percent;
+
   double weighted_index = kPriceReturnWeight * _26_wk_price_growth_rate
-                        + kRevGrowthWeight * _3_yr_rev_growth_rate;
+                        + kRevGrowthWeight * fin_data.Get3YrRevGrowthRate();
 
   // Default values.
   double unscaled_red = kMinGrowthRate;
@@ -61,17 +62,17 @@ void geometry::Geometry::SetOuterColors(double price_quote,
   outer_blue_value = scaled_blue;
 }
 
-void geometry::Geometry::SetOuterEdges(double price_quote,
-                                       double _26_wk_price_return,
-                                       double _3_yr_rev_growth_rate) {
+void geometry::Geometry::SetOuterEdges(finance::FinanceData fin_data) {
   // Turn price return as a growth rate.
   int deci_to_percent = 100;
   double _26_wk_price_growth_rate
-    = (_26_wk_price_return / price_quote) * deci_to_percent;
+    = (fin_data.Get26WkPriceReturn() / fin_data.GetPriceQuote())
+        * deci_to_percent;
 
   // Note: Price return and growth weight can be positive or negative.
-  double unscaled_edge_number = kPriceReturnWeight * _26_wk_price_growth_rate
-                              + kStrongRecWeight * _3_yr_rev_growth_rate;
+  double unscaled_edge_number
+    = kPriceReturnWeight * _26_wk_price_growth_rate
+        + kStrongRecWeight * fin_data.Get3YrRevGrowthRate();
 
   // Scale edge_number between 0 and 8 (max edges).
   double scaled_edge_number
@@ -102,17 +103,13 @@ double geometry::Geometry::GetOuterEdgeNumber() {
 }
 
 
-void geometry::Geometry::SetInnerColors(int buy_rec,
-                                        int sell_rec,
-                                        int hold_rec,
-                                        int strong_buy_rec,
-                                        int strong_sell_rec) {
-  double unscaled_red = kStrongRecWeight * strong_sell_rec
-                      + sell_rec
-                      + hold_rec;
-  double unscaled_green = kStrongRecWeight * strong_buy_rec
-                          + buy_rec
-                          + hold_rec;
+void geometry::Geometry::SetInnerColors(finance::FinanceData fin_data) {
+  double unscaled_red = kStrongRecWeight * fin_data.GetStrongSellRec()
+                      + fin_data.GetSellRec()
+                      + fin_data.GetHoldRec();
+  double unscaled_green = kStrongRecWeight * fin_data.GetStrongBuyRec()
+                          + fin_data.GetBuyRec()
+                          + fin_data.GetHoldRec();
   // Blue color is not needed but can be changed.
   double unscaled_blue = 0.0;
 
@@ -139,14 +136,11 @@ void geometry::Geometry::SetInnerColors(int buy_rec,
   inner_blue_value = scaled_blue;
 }
 
-void geometry::Geometry::SetInnerEdges(int buy_rec,
-                                       int sell_rec,
-                                       int strong_buy_rec,
-                                       int strong_sell_rec) {
-  double unscaled_edge_number = kStrongRecWeight * strong_buy_rec
-                         + buy_rec
-                         - sell_rec
-                         - kStrongRecWeight * strong_sell_rec;
+void geometry::Geometry::SetInnerEdges(finance::FinanceData fin_data) {
+  double unscaled_edge_number = kStrongRecWeight * fin_data.GetStrongBuyRec()
+                         + fin_data.GetBuyRec()
+                         - fin_data.GetSellRec()
+                         - kStrongRecWeight * fin_data.GetStrongSellRec();
 
   // Scale edge_number between 0 and 10 (max edges).
   double scaled_edge_number

@@ -78,27 +78,15 @@ class Geometry {
   // Blue color is not necessary although it is an option than can be modified.
   //===========================================================================
 
-  void SetOuterColors(double price_quote,
-                      double _26_wk_price_return,
-                      double _3_yr_rev_growth_rate);
-  void SetOuterEdges(double price_quote,
-                     double _26_wk_price_return,
-                     double _3_yr_rev_growth_rate);
+  void SetOuterColors(finance::FinanceData fin_data);
+  void SetOuterEdges(finance::FinanceData fin_data);
   double GetOuterRedColor();
   double GetOuterGreenColor();
   double GetOuterBlueColor();
   double GetOuterEdgeNumber();
 
-  void SetInnerColors(int buy_rec,
-                      int sell_rec,
-                      int hold_rec,
-                      int strong_buy_rec,
-                      int strong_sell_rec);
-  // Inner edge number defined only by buy/sell recommendations (no hold_rec).
-  void SetInnerEdges(int buy_rec,
-                     int sell_rec,
-                     int strong_buy_rec,
-                     int strong_sell_rec);
+  void SetInnerColors(finance::FinanceData fin_data);
+  void SetInnerEdges(finance::FinanceData fin_data);
   double GetInnerRedColor();
   double GetInnerGreenColor();
   double GetInnerBlueColor();
