@@ -77,11 +77,15 @@
         - The range of yellow colors increased so it's not just red or green, there is a probably chance it is yellow.
         - The Max/Min constants were larger so more unique stock shapes can be created based on stock attributes.
         
-- **5/3/20** Fix various bugs, improve object decomposition, and create additional UI modifications
+- **5/3/20** Fix various bugs and improve the UI.
     - Fixed API response error for stocks that were not valid.
         - Turns out, getting the CPR response wont produce an exception even for an invalid URL, 
         but parsing the response using nlohmann_json can produce an exception. So Try Catch statement
         was modified around parsing rather than receiving the response.
+    - Modified various constants for Geometry class to make stocks more differentiable. This was important
+    from a functionality perspective as easier differentiation makes it easier to compare different stocks.
+    
+
 
    
    
