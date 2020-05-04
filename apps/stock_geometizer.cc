@@ -237,6 +237,28 @@ void StockGeo::SetGeoData(finance::FinanceData& fin_data,
   geo_data.SetOuterEdges(fin_data);
 };
 
+void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
+  // Draw outer color.
+  cinder::gl::color(geo_data.GetOuterRedColor(),
+                    geo_data.GetOuterGreenColor(),
+                    geo_data.GetOuterBlueColor());
+  int numb_outer_segments = geo_data.GetOuterEdgeNumber();
+
+  // Draw outer geometry.
+  cinder::vec2 center_outer_shape;
+  // Ensure geo_numb is appropriate to properly display geometry.
+  if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
+    return;
+  } else {
+    center_outer_shape
+        = {third_of_window_width * geo_numb, mid_window_height};
+  }
+
+  cinder::gl::drawSolidCircle(center_outer_shape,
+                              kOuterRadius,
+                              numb_outer_segments);
+}
+
 void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
   // Draw inner color.
   cinder::gl::color(geo_data.GetInnerRedColor(),
@@ -258,28 +280,6 @@ void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
   cinder::gl::drawSolidCircle(center_inner_shape,
                               kInnerRadius,
                               numb_inner_segments);
-}
-
-void StockGeo::DrawOuterShape(geometry::Geometry& geo_data, int geo_numb) {
-  // Draw outer color.
-  cinder::gl::color(geo_data.GetOuterRedColor(),
-                    geo_data.GetOuterGreenColor(),
-                    geo_data.GetOuterBlueColor());
-  int numb_outer_segments = geo_data.GetOuterEdgeNumber();
-
-  // Draw outer geometry.
-  cinder::vec2 center_outer_shape;
-  // Ensure geo_numb is appropriate to properly display geometry.
-  if (geo_numb <= 0 || geo_numb > kMaxNumbOfGeos) {
-    return;
-  } else {
-    center_outer_shape
-      = {third_of_window_width * geo_numb, mid_window_height};
-  }
-
-  cinder::gl::drawSolidCircle(center_outer_shape,
-                              kOuterRadius,
-                              numb_outer_segments);
 }
 
 }  // namespace myapp
