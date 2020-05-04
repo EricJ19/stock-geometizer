@@ -5,7 +5,6 @@
 #include <cinder/app/App.h>
 #include <cinder/gl/draw.h>
 #include <cinder/gl/wrapper.h>
-#include <cinder/Text.h>
 
 #include "../blocks/Cinder-ImGui/include/CinderImGui.h"
 #include "cpr/api.h"

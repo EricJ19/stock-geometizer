@@ -78,6 +78,12 @@ class Geometry {
   // Blue color is not necessary although it is an option than can be modified.
   //===========================================================================
 
+  // Outer Colors and Edges are determined by: 26 Week price return,
+  // price quote, and 3 year growth rate. These are extracted
+  // from FinanceData Object.
+
+  // For both SetOuterColors and SetOuterEdges:
+  // fin_data - financial data set associated with this current Geometry class.
   void SetOuterColors(finance::FinanceData fin_data);
   void SetOuterEdges(finance::FinanceData fin_data);
   double GetOuterRedColor();
@@ -85,6 +91,12 @@ class Geometry {
   double GetOuterBlueColor();
   double GetOuterEdgeNumber();
 
+  // Inner Colors and Edges are determined by: buy, sell, hold, strong buy,
+  // and strong sell recommendations. These are extracted
+  // from FinanceData Object.
+
+  // For both SetInnerColors and SetInnerEdges:
+  // fin_data - financial data set associated with this current Geometry class.
   void SetInnerColors(finance::FinanceData fin_data);
   void SetInnerEdges(finance::FinanceData fin_data);
   double GetInnerRedColor();
