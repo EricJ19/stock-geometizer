@@ -25,7 +25,9 @@ and finance.
 I will use the API by [Finnhub](https://finnhub.io/docs/api#quote). Specifically, I will use their API for get requests
 for things like stock prices and other details to analyze the stock. To simplify requesting data from the API, I will
 use [libcurl](https://curl.haxx.se/libcurl/) library and it's wrapper library 
-[C++Requests](https://whoshuu.github.io/cpr/) to support getting data from the API.
+[C++Requests](https://whoshuu.github.io/cpr/) to support getting data from the API. Additionally, I will use
+[OpenSSL](https://www.openssl.org/) to support API calls. Moreover, [nlohmann/json](https://github.com/nlohmann/json) is used to parse JSON response 
+from the API. Additionally, I will use [ImGui](https://github.com/simongeilfus/Cinder-ImGui) to read user inputs for the API calls.
 
 ####Timline:
 By the end of week 1 I aim to incorporate the library complete the logic for the get requests from the API 
