@@ -3,6 +3,8 @@
 [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![docs](https://img.shields.io/badge/docs-yes-brightgreen)](docs/README.md)
 
+**Author**: Eric Jin - [`ericjin2@illinois.edu`](mailto:ericjin2@illinois.edu)
+
 ## What is Stock Geometizer?
 
 ![Example Usage](file:///Users/ericjin/Desktop/cinder_0.9.2_mac/my-projects/final-project-EricJ19/resources/example_usage.png)
@@ -11,23 +13,48 @@ Stock Geometizer is a data visualization tool to determine the desirability of s
 based on various factors such as buy recommendations, 3 year growth rate, 26 week price return, and others. 
 
 The inner shape and color represent expert advise for the stock while the outer shape represents trends in firm 
-performance such as 3 year growth rate. The more green and the more edges, the more desirable; the more red and 
-the less edges, the less desirable. These factors are weighed and scaled to create a wide range of geometry, making
+performance such as 3 year growth rate. These factors are weighed and scaled to create a wide range of geometry, making
 stock data more easy to visualize than ever before.
 
 Compare up to three different stocks using updating financial data to easily inform your investment decisions.
 
-## Setting Up
+## Usage
+
+### User
+
+Stock Geometizer provides a fast means of visually understanding stocks and to comprehend 
+important aspects of a stock as an intuitive reference for people just curious or serious investors. 
+From the click of a button, a geometric representation of a stock is 
+generated with these informative features:
+
+The more green and the more edges, the more desirable; the more red and 
+the less edges, the less desirable. 
+
+Outer Shape - Created based on 3 year growth rate and 26 week price return.
+
+Inner Shape - Created by buy, sell, hold, strong buy, and strong sell recommendations.
+
+### Developer
+
+The amount of geometrical shapes that can be compared can easily be scaled beyond or below the current
+three. This is due to abstractions created by numerous helper functions in stock_geometizer.cc.
+
+Formulas on weighing and scaling financial data for geometric features resides in finance_geometry.cc, which
+can be changed to modify which financial information is weighed more heavily or how greatly the colors or edges
+can vary for example.  
+
+## Building the Project
 
 This was developed on the Mac OS X system and may not work on other platforms. This project uses the Cinder
 platform which can be downloaded from: https://libcinder.org/. Once the Cinder folder is downloaded, create the project from
-within the Cinder folder. Beyond the general app platform, Cinder is used to dynamically generate
+within the Cinder folder. Beyond the general app platform, Cinder is used to dynamically generate geometric 
+shapes integral to the data visualization aspect of the app.
 
 External libraries used: CPR and OpenSSL, nlohmann/json, and ImGui Cinder Block.
 
 Instructions to integrate these libraries:
 
-### Using CPR and OpenSSL
+### Setting up CPR and OpenSSL
 
 #### OpenSSL
 
@@ -42,14 +69,13 @@ Note: This should be done above CPR integration lines in the CMakeLists.txt file
 
 #### CPR
 
-[CPR](https://github.com/whoshuu/cpr) is used to make API calls to [Finhub](https://finnhub.io/) for financial data.
+[CPR](https://github.com/whoshuu/cpr) is used to make API calls to [Finhub](https://finnhub.io/) for financial data. 
 
 From CPR documentation, it is easiest to add CPR as a submodule using these command in Terminal (for Mac):
 ```c++
 git submodule add https://github.com/whoshuu/cpr.git 
 git submodule update --init --recursive
 ```
-
 In the CMakeList.txt file add this:
 ```c++
 add_subdirectory(submodules/cpr)
@@ -57,14 +83,20 @@ include_directories(${CPR_INCLUDE_DIRS})
 target_link_libraries(cinder-myapp ${CPR_LIBRARIES})
 ```
 Then, to use CPR in your project, add this to your source code file:
-
 ```c++
 #include <cpr/cpr.h>
 ```
 
-### Using nlohmann/json
+CPR is used primarily for Get requests from the Finnhub API. An example is as follows:
+```c++
+cpr::Response price_metrics_response = cpr::Get(cpr::Url{
+kMetricsBeginURL + user_input + kPriceMetricEndURL});
+```
+These Get requests are called every time the user inputs a new stock and clicks a button to confirm.
 
-[nlomann/json](https://github.com/nlohmann/json) is used to parse API response from Finhub.io.
+### Setting up nlohmann/json
+
+[nlomann/json](https://github.com/nlohmann/json) is used to parse the API JSON response from Finhub.io.
 
 Add the following into your CMakeLists.txt file:
 ```c++
@@ -90,9 +122,10 @@ Then, to use nlohmann/json in the project add this to your source code files:
 #include <nlohmann/json.hpp>
 ```
 
-### Using ImGui Cinder Block
+### Setting up ImGui Cinder Block
 
-ImGui is used primarily as a means to accept user inputs for custom API calls for different stock.
+ImGui is used primarily as a means to accept user inputs for custom API calls for different stock. Specifically,
+the InputText and Button features are mainly used.
 
 Add the following to your CMakeList.txt file:
 ```c++
@@ -103,10 +136,3 @@ target_link_libraries(cinder-myapp Cinder-ImGui)
 ```
 Then, use #include to add the Cinder Block path into your source code. This path should lead to the "blocks" folder that 
 comes with Cinder.
-
-## Usage
-
-
-
-
-**Author**: Eric Jin - [`ericjin2@illinois.edu`](mailto:ericjin2@illinois.edu)
