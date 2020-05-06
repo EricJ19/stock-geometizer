@@ -12,7 +12,8 @@ based on various factors such as buy recommendations, 3 year growth rate, 26 wee
 
 The inner shape and color represent expert advise for the stock while the outer shape represents trends in firm 
 performance such as 3 year growth rate. The more green and the more edges, the more desirable; the more red and 
-the less edges, the less desirable.
+the less edges, the less desirable. These factors are weighed and scaled to create a wide range of geometry, making
+stock data more easy to visualize than ever before.
 
 Compare up to three different stocks using updating financial data to easily inform your investment decisions.
 
