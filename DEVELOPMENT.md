@@ -89,7 +89,11 @@
     - Better utilize the FinanceData class by changing the function parameters in Geometry class to
     simply accept a FinanceData object rather than ex. 26 Week Price Return from the return value of a function 
     in FinanceData.
-
+ 
+- **5/6/20** Polish UI and Update README.md
+    - Change ImGui so the InputText information fits onto the window
+    - Modify color/edge constants for more differentiated stocks, which is important to more easily compare
+    stocks.
    
    
    
