@@ -28,7 +28,7 @@ class Geometry {
 
   // This is a reasonable, arbitrarily large number based on observed.
   // sample of API responses
-  const double kMaxRecNumb = 30;
+  const double kMaxRecNumb = 50;
   // Max/Min growth rate is for _3_yr_rev_growth_rate and _26_wk_price_return.
   // These are arbitrarily and small/large percentages
   // that would show clear differences in color for typical stocks.

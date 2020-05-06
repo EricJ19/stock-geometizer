@@ -90,7 +90,7 @@
     simply accept a FinanceData object rather than ex. 26 Week Price Return from the return value of a function 
     in FinanceData.
  
-- **5/6/20** Polish UI and Update README.md
+- **5/6/20** Polish UI, update README.md, and build tests
     - Change ImGui so the InputText information fits onto the window
     - Modify color/edge constants for more differentiated stocks, which is important to more easily compare
     stocks.
@@ -104,6 +104,8 @@
         interact with this project.
         - To make the README.md more visually informative and appealing I looked up Piazza and other websites on 
         how to add images and gifs. This was important as it complimented the data visualization nature of the project.
+    - Built tests for the Geometry functions that determined color and edge number.
+        - Expected values were calculated manually and compared to actual results.
    
    
    
