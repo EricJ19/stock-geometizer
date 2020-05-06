@@ -21,24 +21,26 @@ Compare up to three different stocks using updating financial data to easily inf
 
 This was developed on the Mac OS X system and may not work on other platforms. This project uses the Cinder
 platform which can be downloaded from: https://libcinder.org/. Once the Cinder folder is downloaded, create the project from
-within the Cinder folder.
+within the Cinder folder. Beyond the general app platform, Cinder is used to dynamically generate
 
-External libraries used: CPR and OpenSSL, nlohmann/json, and ImGui CinderBlock.
+External libraries used: CPR and OpenSSL, nlohmann/json, and ImGui Cinder Block.
 
 Instructions to integrate these libraries:
 
-#### Using CPR and OpenSSL
+### Using CPR and OpenSSL
+
+#### OpenSSL
 
 Crucially, CPR does not support it's own Transport Layer Security (TLS), so it can be paired with OpenSSL.
 To make requests using OpenSSL, link against libCURL. Do this by adding the following to the CMakeLists.txt:
-
 ```c++
 find_package(CURL)
 include_directories(${CURL_INCLUDE_DIRS})
 target_link_libraries(cinder-myapp ${CURL_LIBRARY})
 ```
-
 Note: This should be done above CPR integration lines in the CMakeLists.txt file.
+
+#### CPR
 
 [CPR](https://github.com/whoshuu/cpr) is used to make API calls to [Finhub](https://finnhub.io/) for financial data.
 
@@ -49,25 +51,22 @@ git submodule update --init --recursive
 ```
 
 In the CMakeList.txt file add this:
-
 ```c++
 add_subdirectory(submodules/cpr)
 include_directories(${CPR_INCLUDE_DIRS})
 target_link_libraries(cinder-myapp ${CPR_LIBRARIES})
 ```
-
 Then, to use CPR in your project, add this to your source code file:
 
 ```c++
 #include <cpr/cpr.h>
 ```
 
-#### Using nlohmann/json
+### Using nlohmann/json
 
 [nlomann/json](https://github.com/nlohmann/json) is used to parse API response from Finhub.io.
 
 Add the following into your CMakeLists.txt file:
-
 ```c++
 # JSON Library. Header-only.
 FetchContent_Declare(
@@ -85,15 +84,25 @@ endif()
 
 target_link_libraries(cinder-myapp nlohmann_json)
 ```
-
 Then, to use nlohmann/json in the project add this to your source code files:
 
 ```c++
 #include <nlohmann/json.hpp>
 ```
 
-#### Using ImGui Cinderblock
+### Using ImGui Cinder Block
 
+ImGui is used primarily as a means to accept user inputs for custom API calls for different stock.
+
+Add the following to your CMakeList.txt file:
+```c++
+# Links ImGui CinderBlock
+FetchContent_GetProperties(Cinder-ImGui)
+include_directories(igl::opengl_glfw_imgui)
+target_link_libraries(cinder-myapp Cinder-ImGui)
+```
+Then, use #include to add the Cinder Block path into your source code. This path should lead to the "blocks" folder that 
+comes with Cinder.
 
 ## Usage
 
