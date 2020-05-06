@@ -32,8 +32,8 @@ class Geometry {
   // Max/Min growth rate is for _3_yr_rev_growth_rate and _26_wk_price_return.
   // These are arbitrarily and small/large percentages
   // that would show clear differences in color for typical stocks.
-  const double kMinGrowthRate = -90;
-  const double kMaxGrowthRate = 90;
+  const double kMinGrowthRate = -100;
+  const double kMaxGrowthRate = 100;
 
   // Outer edge number is larger than inner as
   // outer shape is related to percentage, which has larger range

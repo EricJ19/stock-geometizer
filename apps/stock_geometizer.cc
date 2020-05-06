@@ -53,6 +53,10 @@ void StockGeo::draw() {
 void StockGeo::keyDown(KeyEvent event) { }
 
 void StockGeo::CreateStockWindow() {
+  // Arbitrary x and y width, but large enough to see InputText labels.
+  const ImVec2 kStockWindowSize = ImVec2(200,200);
+  ImGui::SetNextWindowSize(kStockWindowSize);
+
   ImGui::Begin("Geometizer");
 
   ImGui::Text("Input a Stock");
