@@ -3,7 +3,7 @@
 [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![docs](https://img.shields.io/badge/docs-yes-brightgreen)](docs/README.md)
 
-##What is Stock Geometizer?
+## What is Stock Geometizer?
 
 ![Screenshot](file:///Users/ericjin/Desktop/cinder_0.9.2_mac/my-projects/final-project-EricJ19/resources/example_usage.png)
 
