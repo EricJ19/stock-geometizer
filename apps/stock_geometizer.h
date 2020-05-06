@@ -35,7 +35,9 @@ const std::string kAPIBase = "https://finnhub.io/api/v1";
 // Key to use finhubb.io API
 const std::string kAPIKey = "bqhl2s7rh5rdcs9r2ovg";
 
-// Beginning of URLs for different API calls for finance metrics.
+/**
+ * Beginning of URLs for different API calls for finance metrics.
+ */
 
 // Beginning call for data on price quote of stock.
 const std::string kPriceQuoteBeginURL = kAPIBase + "/quote?symbol=";
@@ -47,7 +49,9 @@ const std::string kMetricsBeginURL = kAPIBase + "/stock/metric?symbol=";
 const std::string kRecommendationBeginURL = kAPIBase
                                           + "/stock/recommendation?symbol=";
 
-// Ending of URLs for different API calls for finance metrics.
+/**
+ * Ending of URLs for different API calls for finance metrics.
+ */
 
 // Used for Price Quote.
 const std::string kPriceQuoteEndURL = "&token=" + kAPIKey;
@@ -58,19 +62,21 @@ const std::string kGrowthMetricEndURL = "&metric=growth&token=" + kAPIKey;
 // Used for buy, sell, hold, strong buy, and strong sell recommendations.
 const std::string kRecommendationsEndURL = "&token=" + kAPIKey;
 
+// Arbitrary input size for users that's large enough to accept
+// most stock symbols.
+const int kMaxStockLength = 10;
+
 class StockGeo : public cinder::app::App {
  private:
   // Represents the y-position of the vertical middle of the app window.
-  double mid_window_height{};
+  double mid_window_height;
   // Represents the x-position of a third of the app window width.
-  double third_of_window_width{};
+  double third_of_window_width;
 
-  //TODO: Try to change these to vectors or some other wrapper.
-
-  // These are for ImGui::InputText.
-  char first_input_chars[7];
-  char second_input_chars[7];
-  char third_input_chars[7];
+  // These are to store user input from ImGui::InputText.
+  char first_input_chars[kMaxStockLength];
+  char second_input_chars[kMaxStockLength];
+  char third_input_chars[kMaxStockLength];
   std::string first_input_str;
   std::string second_input_str;
   std::string third_input_str;
@@ -135,8 +141,6 @@ class StockGeo : public cinder::app::App {
   // geo_numb represents which geometry shape is being analyzed (from 1 to 3).
   void DrawOuterShape(geometry::Geometry& geo_data, int geo_numb);
 };
-
-//int callback(ImGuiTextEditCallbackData* data);
 
 }  // namespace myapp
 
