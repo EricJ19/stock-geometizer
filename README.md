@@ -8,6 +8,7 @@
 ## What is Stock Geometizer?
 
 ![Example Usage](resources/example_usage.png)
+###### Three stock geometries are created from the window on the bottom right. These shapes are based on financial data from the stock.
 
 Stock Geometizer is a data visualization tool to determine the desirability of stocks. A geometric shape is generated
 based on various factors such as buy recommendations, 3 year growth rate, 26 week price return, and others. 
@@ -21,6 +22,8 @@ Compare up to three different stocks using updating financial data to easily inf
 ## Usage
 
 ### User
+
+![](resources/stock_geometizer_demo.gif)
 
 Stock Geometizer provides a fast means of visually understanding stocks and to comprehend 
 important aspects of a stock as an intuitive reference for people just curious or serious investors. 
@@ -50,7 +53,9 @@ platform which can be downloaded from: https://libcinder.org/. Once the Cinder f
 within the Cinder folder. Beyond the general app platform, Cinder is used to dynamically generate geometric 
 shapes integral to the data visualization aspect of the app.
 
-External libraries used: CPR and OpenSSL, nlohmann/json, and ImGui Cinder Block.
+External libraries used: Cinder, CPR and OpenSSL, nlohmann/json, and ImGui Cinder Block.
+
+API used: [Finhub](https://finnhub.io/).
 
 Instructions to integrate these libraries:
 
@@ -59,7 +64,7 @@ Instructions to integrate these libraries:
 #### OpenSSL
 
 Crucially, CPR does not support it's own Transport Layer Security (TLS), so it can be paired with OpenSSL.
-To make requests using OpenSSL, link against libCURL. Do this by adding the following to the CMakeLists.txt:
+To make requests using OpenSSL, link against libcURL. Do this by adding the following to the CMakeLists.txt:
 ```c++
 find_package(CURL)
 include_directories(${CURL_INCLUDE_DIRS})
@@ -69,7 +74,7 @@ Note: This should be done above CPR integration lines in the CMakeLists.txt file
 
 #### CPR
 
-[CPR](https://github.com/whoshuu/cpr) is used to make API calls to [Finhub](https://finnhub.io/) for financial data. 
+[CPR](https://github.com/whoshuu/cpr) is used to make API calls to Finhub for financial data. 
 
 From CPR documentation, it is easiest to add CPR as a submodule using these command in Terminal (for Mac):
 ```c++
@@ -87,10 +92,9 @@ Then, to use CPR in your project, add this to your source code file:
 #include <cpr/cpr.h>
 ```
 
-CPR is used primarily for Get requests from the Finnhub API. An example is as follows:
+CPR is used primarily for Get requests from the Finnhub API. An example of Get requests used is as follows:
 ```c++
-cpr::Response price_metrics_response = cpr::Get(cpr::Url{
-kMetricsBeginURL + user_input + kPriceMetricEndURL});
+cpr::Response price_metrics_response = cpr::Get(cpr::Url{kMetricsBeginURL + user_input + kPriceMetricEndURL});
 ```
 These Get requests are called every time the user inputs a new stock and clicks a button to confirm.
 
