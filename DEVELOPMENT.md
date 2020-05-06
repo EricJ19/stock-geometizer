@@ -94,6 +94,16 @@
     - Change ImGui so the InputText information fits onto the window
     - Modify color/edge constants for more differentiated stocks, which is important to more easily compare
     stocks.
+    - The README.md was updated with various ways of integrating external libraries.
+        - This was done by examining the my own code in CMakeList.txt and the repositories of those libraries
+        to create steps for the client to integrate all the libraries used for this project.
+        - It was difficult adding the libraries, especially CPR and OpenSSL, so to make is easier for the client,
+        clear steps, links, and code blocks of exactly how to add external libraries were included in README.md.
+    - The README.md was also updated with a description of the usage of this project
+        - My project is a finance tool so it as necessary to include ways of how either a user or a developer can
+        interact with this project.
+        - To make the README.md more visually informative and appealing I looked up Piazza and other websites on 
+        how to add images and gifs. This was important as it complimented the data visualization nature of the project.
    
    
    
