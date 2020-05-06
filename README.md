@@ -7,7 +7,7 @@
 
 ## What is Stock Geometizer?
 
-![Example Usage](file:///Users/ericjin/Desktop/cinder_0.9.2_mac/my-projects/final-project-EricJ19/resources/example_usage.png)
+![Example Usage](master/resources/example_usage.png)
 
 Stock Geometizer is a data visualization tool to determine the desirability of stocks. A geometric shape is generated
 based on various factors such as buy recommendations, 3 year growth rate, 26 week price return, and others. 
