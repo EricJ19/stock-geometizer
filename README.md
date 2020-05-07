@@ -39,6 +39,11 @@ Inner Shape - Created by buy, sell, hold, strong buy, and strong sell recommenda
 
 ### Developer
 
+The general development pipeline is that a FinanceData object is used to store financial data associated with one stock. 
+A Geometry object uses this FinanceData to calculate information on the color and shape of the geometry. So, each 
+FinanceData is paired with a Geometry class. API calls and responses as well as generating the UI including
+displaying the shapes is done through stock_geometizer.cc.
+
 The amount of geometrical shapes that can be compared can easily be scaled beyond or below the current
 three. This is due to abstractions created by numerous helper functions in stock_geometizer.cc.
 
@@ -55,7 +60,7 @@ shapes integral to the data visualization aspect of the app.
 
 External libraries used: Cinder, CPR and OpenSSL, nlohmann/json, and ImGui Cinder Block.
 
-API used: [Finnhub](https://finnhub.io/).
+API used: [Finnhub Stock API](https://finnhub.io/).
 
 Instructions to integrate these libraries:
 
