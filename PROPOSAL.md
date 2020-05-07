@@ -6,8 +6,8 @@ Author: Eric Jin
 
 For my final project, I intend to create a data visualization app to analyze and compare stocks. The current vision is
 to allow the user to specify a particular stock to the app and in response the app will produce a geometric shape. This
-shape is specified based on information on the stock such as "26 Week Price Daily Return", number of recommendation to
-buy this stock by analysts. For instance, a stock with a large number of recommendations may appear with a darker shade
+shape is specified based on information on the stock such as "26 Week Price Daily Return", number of recommendations to
+buy this stock by analysts etc. For instance, a stock with a large number of recommendations may appear with a darker shade
 of green where a stock with a lower number of recommendations will appear more red. Another example is, this shape
 can have more edges if, say the average return over some time is higher. Additionally, there can be up to 3 stocks the
 user can choose to visually compare the geometric shapes and colors of the stocks side by side. There may be more direct
@@ -16,7 +16,7 @@ analysis of the stock (ex. The Number of Recommendations for the Stock is: 56) d
 ####Interest:
 
 Personally, I enjoy the subjects of economics and finance and have taken several courses in economics from high school
-and university. In addition, when messy about with Cinder in the "Snake" CS126 assignment, I found myself enjoying and
+and university. In addition, when messing about with Cinder in the "Snake" CS126 assignment, I found myself enjoying and
 experimenting with shapes. Thus, I feel interested in developing a data visualization tool in the realm of economics 
 and finance.
 
