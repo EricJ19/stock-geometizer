@@ -11,7 +11,7 @@
 #include <array>
 #include <nlohmann/json.hpp>
 
-namespace myapp {
+namespace stockgeoapp {
 
 // Used to ensure each geometrical shape is vertically centered.
 const double kHalf = 2.0;
@@ -142,6 +142,6 @@ class StockGeo : public cinder::app::App {
   void DrawOuterShape(geometry::Geometry& geo_data, int geo_numb);
 };
 
-}  // namespace myapp
+}  // namespace stockgeoapp
 
 #endif  // FINALPROJECT_APPS_MYAPP_H_

@@ -68,7 +68,7 @@ To make requests using OpenSSL, link against libcURL. Do this by adding the foll
 ```c++
 find_package(CURL)
 include_directories(${CURL_INCLUDE_DIRS})
-target_link_libraries(cinder-myapp ${CURL_LIBRARY})
+target_link_libraries(cinder-stockgeoapp ${CURL_LIBRARY})
 ```
 Note: This should be done above CPR integration lines in the CMakeLists.txt file.
 
@@ -85,7 +85,7 @@ In the CMakeList.txt file add this:
 ```c++
 add_subdirectory(submodules/cpr)
 include_directories(${CPR_INCLUDE_DIRS})
-target_link_libraries(cinder-myapp ${CPR_LIBRARIES})
+target_link_libraries(cinder-stockgeoapp ${CPR_LIBRARIES})
 ```
 Then, to use CPR in your project, add this to your source code file:
 ```c++
@@ -118,7 +118,7 @@ if(NOT nlohmann_json_POPULATED)
     target_include_directories(nlohmann_json INTERFACE ${nlohmann_json_SOURCE_DIR}/single_include)
 endif()
 
-target_link_libraries(cinder-myapp nlohmann_json)
+target_link_libraries(cinder-stockgeoapp nlohmann_json)
 ```
 Then, to use nlohmann/json in the project add this to your source code files:
 
@@ -136,7 +136,7 @@ Add the following to your CMakeList.txt file:
 # Links ImGui CinderBlock
 FetchContent_GetProperties(Cinder-ImGui)
 include_directories(igl::opengl_glfw_imgui)
-target_link_libraries(cinder-myapp Cinder-ImGui)
+target_link_libraries(cinder-stockgeoapp Cinder-ImGui)
 ```
 Then, use #include to add the Cinder Block path into your source code. This path should lead to the "blocks" folder that 
 comes with Cinder.

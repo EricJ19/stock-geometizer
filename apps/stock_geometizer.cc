@@ -12,7 +12,7 @@
 #include "cpr/cprtypes.h"
 #include "nlohmann/json.hpp"
 
-namespace myapp {
+namespace stockgeoapp {
 
 using cinder::app::KeyEvent;
 
@@ -286,4 +286,4 @@ void StockGeo::DrawInnerShape(geometry::Geometry& geo_data, int geo_numb) {
                               numb_inner_segments);
 }
 
-}  // namespace myapp
+}  // namespace stockgeoapp

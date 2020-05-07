@@ -9,7 +9,7 @@ using cinder::app::App;
 using cinder::app::RendererGl;
 
 
-namespace myapp {
+namespace stockgeoapp {
 
 const int kSamples = 8;
 const int kWidth = 1500;
@@ -21,10 +21,10 @@ void SetUp(App::Settings* settings) {
   settings->setTitle("Stock Geometizer");
 }
 
-}  // namespace myapp
+}  // namespace stockgeoapp
 
 
 // This is a macro that runs the application.
-CINDER_APP(myapp::StockGeo,
-           RendererGl(RendererGl::Options().msaa(myapp::kSamples)),
-           myapp::SetUp)
+CINDER_APP(stockgeoapp::StockGeo,
+           RendererGl(RendererGl::Options().msaa(stockgeoapp::kSamples)),
+           stockgeoapp::SetUp)
