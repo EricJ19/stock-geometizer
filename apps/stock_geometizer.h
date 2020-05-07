@@ -40,10 +40,12 @@ const std::string kAPIKey = "bqhl2s7rh5rdcs9r2ovg";
  */
 
 // Beginning call for data on price quote of stock.
-const std::string kPriceQuoteBeginURL = kAPIBase + "/quote?symbol=";
+const std::string kPriceQuoteBeginURL = kAPIBase
+                                      + "/quote?symbol=";
 // Beginning (as user's input splits the full URL) call for data on
 // 26 Week Price Return and 3 Year Revenue Growth Rate.
-const std::string kMetricsBeginURL = kAPIBase + "/stock/metric?symbol=";
+const std::string kMetricsBeginURL = kAPIBase
+                                   + "/stock/metric?symbol=";
 // Beginning call for data on number of:
 // buy, sell, hold, strong buy, and strong sell recommendations.
 const std::string kRecommendationBeginURL = kAPIBase
