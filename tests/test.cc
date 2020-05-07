@@ -2,7 +2,6 @@
 
 #define CATCH_CONFIG_MAIN
 
-#include <cinder/Rand.h>
 #include <mylibrary/finance_data.h>
 #include <mylibrary/finance_geometry.h>
 
@@ -57,9 +56,9 @@ TEST_CASE("Geometry class modifies geometry based on FinanceData",
     double expected_blue = 0;
     double expected_green = 0.4;
 
-    REQUIRE(test_geo.GetInnerRedColor() == 0.4);
-    REQUIRE(test_geo.GetInnerBlueColor() == 0);
-    REQUIRE(test_geo.GetInnerGreenColor() == 0.4);
+    REQUIRE(test_geo.GetInnerRedColor() == expected_red);
+    REQUIRE(test_geo.GetInnerBlueColor() == expected_blue);
+    REQUIRE(test_geo.GetInnerGreenColor() == expected_green);
   }
 
   SECTION("Sets outer edges based on stock data") {
