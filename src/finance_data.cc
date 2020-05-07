@@ -5,7 +5,7 @@
 namespace finance {
 
 /**
- * Getters
+ * Getters.
  */
 
 double FinanceData::GetPriceQuote() const {
@@ -41,7 +41,7 @@ int FinanceData::GetStrongSellRec() const {
 }
 
 /**
- * Setters
+ * Setters.
  */
 
 void FinanceData::SetPriceQuote(double price_quote_to_set) {

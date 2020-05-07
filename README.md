@@ -55,7 +55,7 @@ shapes integral to the data visualization aspect of the app.
 
 External libraries used: Cinder, CPR and OpenSSL, nlohmann/json, and ImGui Cinder Block.
 
-API used: [Finhub](https://finnhub.io/).
+API used: [Finnhub](https://finnhub.io/).
 
 Instructions to integrate these libraries:
 
@@ -92,7 +92,7 @@ Then, to use CPR in your project, add this to your source code file:
 #include <cpr/cpr.h>
 ```
 
-CPR is used primarily for Get requests from the Finnhub API. An example of Get requests used is as follows:
+CPR is used primarily for Get requests from the Finnhub API. An example of a Get request used is as follows:
 ```c++
 cpr::Response price_metrics_response = cpr::Get(cpr::Url{kMetricsBeginURL + user_input + kPriceMetricEndURL});
 ```

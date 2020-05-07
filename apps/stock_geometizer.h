@@ -102,7 +102,7 @@ class StockGeo : public cinder::app::App {
 
   // Calls and Receives API data, storing them in FinanceData
   // and Geometry objects.
-  // user_input is the input to the ImGui::InputText
+  // user_input is the input to the ImGui::InputText.
   // geo_numb represents which geometry from which call being analyzed
   // from 1 to 3.
   void ReceiveAPICallData(const std::string& user_input, int geo_numb);
@@ -127,7 +127,7 @@ class StockGeo : public cinder::app::App {
                       const nlohmann::json & parse_recommendations);
 
   // Sets color and edge number of inner and outer shape of a shape.
-  // fin_data represents which financial data set is being analyazed.
+  // fin_data represents which financial data set is being analyzed.
   // geometry_data represents which geometry data set being analyzed.
   // geo_data is modified based on fin_data.
   void SetGeoData(finance::FinanceData& fin_data,
